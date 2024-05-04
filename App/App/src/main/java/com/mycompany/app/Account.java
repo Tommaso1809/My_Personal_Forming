@@ -15,11 +15,11 @@ public class Account extends javax.swing.JFrame {
     public Account() {
         initComponents();
         
-        connectDB();
+        //connectDB();
         
     }
     
-    public void connectDB(){
+   /* public void connectDB(){
         
         try{
             String url="jdbc:mysql://localhost:3306/personal_forming";
@@ -37,7 +37,7 @@ public class Account extends javax.swing.JFrame {
         catch(ClassNotFoundException c){
             c.printStackTrace();
         }
-    }
+    }*/
 
     
     @SuppressWarnings("unchecked")
@@ -69,6 +69,7 @@ public class Account extends javax.swing.JFrame {
         setTitle("My Personal Forming - Account");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
+        setFocusTraversalPolicyProvider(true);
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(1022, 527));
         setResizable(false);
@@ -98,7 +99,7 @@ public class Account extends javax.swing.JFrame {
         CaricaLabel.setText("Carica gli attestati");
 
         PicturUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PicturUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\tomma\\Downloads\\user.png")); // NOI18N
+        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/user.png"))); // NOI18N
 
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -255,13 +256,10 @@ public class Account extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(Topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(Dati, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(Topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Dati, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

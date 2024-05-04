@@ -166,7 +166,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\tomma\Downloads\user.png"/>
+              <Image iconType="3" name="/com/mycompany/app/img/user.png"/>
             </Property>
           </Properties>
         </Component>
@@ -274,7 +274,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\tomma\Downloads\user_show.png"/>
+              <Image iconType="3" name="/com/mycompany/app/img/worker.png"/>
             </Property>
           </Properties>
         </Component>
@@ -329,7 +329,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\tomma\Downloads\add.png"/>
+              <Image iconType="3" name="/com/mycompany/app/img/add.png"/>
             </Property>
           </Properties>
         </Component>
@@ -384,7 +384,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\tomma\Downloads\formaction.png"/>
+              <Image iconType="3" name="/com/mycompany/app/img/formazione.png"/>
             </Property>
           </Properties>
         </Component>

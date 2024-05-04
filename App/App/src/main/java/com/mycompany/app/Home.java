@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.app;
-import com.mycompany.app.Account;
 /**
  *
  * @author Tommaso
@@ -76,7 +75,7 @@ public class Home extends javax.swing.JFrame {
         CaricaLabel.setText("Carica gli attestati");
 
         PicturUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PicturUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\tomma\\Downloads\\user.png")); // NOI18N
+        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/user.png"))); // NOI18N
 
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,7 +148,7 @@ public class Home extends javax.swing.JFrame {
         VisualizzaBTN.setText("Visualizza Impiegati");
 
         imgVisualizza.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imgVisualizza.setIcon(new javax.swing.ImageIcon("C:\\Users\\tomma\\Downloads\\user_show.png")); // NOI18N
+        imgVisualizza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/worker.png"))); // NOI18N
 
         javax.swing.GroupLayout Visualizza_impiegatiLayout = new javax.swing.GroupLayout(Visualizza_impiegati);
         Visualizza_impiegati.setLayout(Visualizza_impiegatiLayout);
@@ -180,7 +179,7 @@ public class Home extends javax.swing.JFrame {
         VisualizzaBTN1.setText("Aggiungi Impiegato");
 
         imgAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imgAdd.setIcon(new javax.swing.ImageIcon("C:\\Users\\tomma\\Downloads\\add.png")); // NOI18N
+        imgAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/add.png"))); // NOI18N
 
         javax.swing.GroupLayout Aggiungi_impiegatoLayout = new javax.swing.GroupLayout(Aggiungi_impiegato);
         Aggiungi_impiegato.setLayout(Aggiungi_impiegatoLayout);
@@ -211,7 +210,7 @@ public class Home extends javax.swing.JFrame {
         VisualizzaBTN2.setText("Aggiungi Formazione");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\tomma\\Downloads\\formaction.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/formazione.png"))); // NOI18N
 
         javax.swing.GroupLayout Aggiungi_formazioneLayout = new javax.swing.GroupLayout(Aggiungi_formazione);
         Aggiungi_formazione.setLayout(Aggiungi_formazioneLayout);
@@ -287,9 +286,6 @@ public class Home extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_Visualizza_impiegatiMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
