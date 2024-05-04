@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"com.mycompany.app","l":"Account"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.mycompany.app","l":"Dipendenti"},{"p":"com.mycompany.app","l":"Home"}];updateSearchResults();

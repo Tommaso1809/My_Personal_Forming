@@ -1,12 +1,12 @@
 
 package com.mycompany.app;
 
-public class Dipendenti extends javax.swing.JFrame {
+public class Aggiungi extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
      */
-    public Dipendenti() {
+    public Aggiungi() {
         initComponents();
     }
 
@@ -30,11 +30,18 @@ public class Dipendenti extends javax.swing.JFrame {
         Dipendenti = new javax.swing.JPanel();
         dipendentiLabel = new javax.swing.JLabel();
         nomeLabel = new javax.swing.JLabel();
-        nomeCampo = new javax.swing.JLabel();
         cognomeLabel = new javax.swing.JLabel();
-        cognomeCampo = new javax.swing.JLabel();
-        ruoloLabel = new javax.swing.JLabel();
-        ruoloCampo = new javax.swing.JLabel();
+        cognomeField = new java.awt.TextField();
+        ddnLabel = new java.awt.Label();
+        ddnField = new java.awt.TextField();
+        telefonoLabel = new javax.swing.JLabel();
+        textField1 = new java.awt.TextField();
+        nomeField = new java.awt.TextField();
+        emailLabel = new java.awt.Label();
+        textField2 = new java.awt.TextField();
+        ruoloLabel = new java.awt.Label();
+        ruoloField = new java.awt.TextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Personal Forming - Dipendenti");
@@ -118,7 +125,7 @@ public class Dipendenti extends javax.swing.JFrame {
             TopbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TopbarLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
                 .addContainerGap())
         );
         TopbarLayout.setVerticalGroup(
@@ -132,22 +139,53 @@ public class Dipendenti extends javax.swing.JFrame {
         Dipendenti.setBackground(new java.awt.Color(255, 255, 255));
 
         dipendentiLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        dipendentiLabel.setText("DIPENDENTI");
+        dipendentiLabel.setText("AGGIUNGI DIPENDENTE");
 
-        nomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        nomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        nomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nomeLabel.setText("Nome");
 
-        nomeCampo.setText("Tommaso");
-
-        cognomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        cognomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        cognomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cognomeLabel.setText("Cognome");
+        cognomeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        cognomeCampo.setText("Polvere");
+        ddnLabel.setAlignment(java.awt.Label.CENTER);
+        ddnLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ddnLabel.setText("Data di nascita");
 
-        ruoloLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        telefonoLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        telefonoLabel.setText("Telefono");
+
+        textField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        textField1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        textField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField1ActionPerformed(evt);
+            }
+        });
+
+        nomeField.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        nomeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeFieldActionPerformed(evt);
+            }
+        });
+
+        emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        emailLabel.setText("E-mail");
+
+        textField2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        ruoloLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         ruoloLabel.setText("Ruolo");
 
-        ruoloCampo.setText("Sviluppatore");
+        ruoloField.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        jButton1.setBackground(new java.awt.Color(8, 37, 186));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Invia");
 
         javax.swing.GroupLayout DipendentiLayout = new javax.swing.GroupLayout(Dipendenti);
         Dipendenti.setLayout(DipendentiLayout);
@@ -157,36 +195,67 @@ public class Dipendenti extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dipendentiLabel)
-                    .addGroup(DipendentiLayout.createSequentialGroup()
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeLabel)
-                            .addComponent(nomeCampo))
-                        .addGap(70, 70, 70)
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cognomeLabel)
-                            .addComponent(cognomeCampo))
-                        .addGap(70, 70, 70)
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ruoloCampo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ruoloLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(427, 427, 427))
+                    .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1)
+                        .addGroup(DipendentiLayout.createSequentialGroup()
+                            .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(nomeLabel)
+                                .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(telefonoLabel)
+                                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(90, 90, 90)
+                            .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cognomeLabel)
+                                .addComponent(cognomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(90, 90, 90)
+                            .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ruoloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ddnField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ddnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ruoloField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DipendentiLayout.setVerticalGroup(
             DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DipendentiLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(dipendentiLabel)
-                .addGap(35, 35, 35)
-                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeLabel)
-                    .addComponent(cognomeLabel)
-                    .addComponent(ruoloLabel))
-                .addGap(10, 10, 10)
-                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeCampo)
-                    .addComponent(cognomeCampo)
-                    .addComponent(ruoloCampo))
-                .addGap(288, 288, 288))
+                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cognomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(DipendentiLayout.createSequentialGroup()
+                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(ddnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(DipendentiLayout.createSequentialGroup()
+                                .addComponent(dipendentiLabel)
+                                .addGap(30, 30, 30)
+                                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(nomeLabel)
+                                    .addComponent(cognomeLabel))))
+                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(DipendentiLayout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(ddnField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DipendentiLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(40, 40, 40)
+                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(DipendentiLayout.createSequentialGroup()
+                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(telefonoLabel)
+                            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(DipendentiLayout.createSequentialGroup()
+                        .addComponent(ruoloLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ruoloField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(53, 53, 53)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,6 +296,14 @@ public class Dipendenti extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_HomeLabelMouseClicked
 
+    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField1ActionPerformed
+
+    private void nomeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,14 +321,18 @@ public class Dipendenti extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Dipendenti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Aggiungi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Dipendenti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Aggiungi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Dipendenti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Aggiungi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dipendenti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Aggiungi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -260,7 +341,7 @@ public class Dipendenti extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dipendenti().setVisible(true);
+                new Aggiungi().setVisible(true);
             }
         });
     }
@@ -274,13 +355,20 @@ public class Dipendenti extends javax.swing.JFrame {
     private javax.swing.JPanel Sidebar;
     private javax.swing.JPanel Topbar;
     private javax.swing.JLabel WelcomeLabel;
-    private javax.swing.JLabel cognomeCampo;
+    private java.awt.TextField cognomeField;
     private javax.swing.JLabel cognomeLabel;
+    private java.awt.TextField ddnField;
+    private java.awt.Label ddnLabel;
     private javax.swing.JLabel dipendentiLabel;
-    private javax.swing.JLabel nomeCampo;
+    private java.awt.Label emailLabel;
+    private javax.swing.JButton jButton1;
+    private java.awt.TextField nomeField;
     private javax.swing.JLabel nomeLabel;
-    private javax.swing.JLabel ruoloCampo;
-    private javax.swing.JLabel ruoloLabel;
+    private java.awt.TextField ruoloField;
+    private java.awt.Label ruoloLabel;
+    private javax.swing.JLabel telefonoLabel;
+    private java.awt.TextField textField1;
+    private java.awt.TextField textField2;
     private javax.swing.JLabel titleBar;
     // End of variables declaration//GEN-END:variables
 }
