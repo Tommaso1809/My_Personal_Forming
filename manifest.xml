@@ -4,16 +4,16 @@
   <headerType>gui</headerType>
   <jar>C:\Users\tomma\Desktop\VS Java Swing modify\my_personal_forming\my_personal_forming.jar</jar>
   <outfile>C:\Users\tomma\Desktop\My Personal Forming.exe</outfile>
-  <errTitle>Devi installare Java per far funzionare l&apos;applicazione</errTitle>
+  <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
   <priority>normal</priority>
   <downloadUrl></downloadUrl>
   <supportUrl></supportUrl>
-  <stayAlive>true</stayAlive>
-  <restartOnCrash>true</restartOnCrash>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon></icon>
+  <icon>C:\Users\tomma\Downloads\iconaForm.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>true</requiresJdk>
