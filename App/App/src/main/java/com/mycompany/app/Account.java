@@ -1,5 +1,5 @@
-
 package com.mycompany.app;
+
 import java.sql.*;
 
 
@@ -8,11 +8,11 @@ public class Account extends javax.swing.JFrame {
     
     public Account() {
         initComponents();
-        connectDB();
+        //connectDB();
         
     }
     
-   public void connectDB(){
+   /*public void connectDB(){
         
         try{
             String url="jdbc:mysql://localhost:3306/personal_forming";
@@ -31,7 +31,7 @@ public class Account extends javax.swing.JFrame {
             c.printStackTrace();
         }
     }
-
+*/
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -64,7 +64,6 @@ public class Account extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setFocusTraversalPolicyProvider(true);
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(1022, 527));
         setResizable(false);
         setSize(new java.awt.Dimension(1500, 200));
 
