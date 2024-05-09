@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\Users\tomma\Desktop\VS Java Swing modify\my_personal_forming\my_personal_forming.jar</jar>
-  <outfile>C:\Users\tomma\Desktop\My Personal Forming.exe</outfile>
+  <jar>./My_Personal_Forming\App/my_personal_forming.jar</jar>
+  <outfile>./My_Personal_Forming\App\My Personal Forming.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\tomma\Downloads\iconaForm.ico</icon>
+  <icon>./My_Personal_Forming\iconaForm.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>true</requiresJdk>
