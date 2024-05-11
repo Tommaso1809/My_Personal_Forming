@@ -8,30 +8,68 @@ public class Account extends javax.swing.JFrame {
     
     public Account() {
         initComponents();
-        //connectDB();
+        showAccount();
         
     }
     
-   /*public void connectDB(){
+    private Connection connectDB(){
         
         try{
-            String url="jdbc:mysql://localhost:3306/personal_forming";
+            String url="jdbc:mysql://localhost:3306/my_personal_forming";
             String username="root";
             String password="";
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection=DriverManager.getConnection(url,username,password);
-            System.out.println("Connesso al DB");
+            
+            return connection;
             
             
             
         }catch(SQLException s){
             s.printStackTrace();
+            return null;
         }
         catch(ClassNotFoundException c){
             c.printStackTrace();
+            return null;
         }
     }
-*/
+
+    public void showAccount() {
+
+        Connection connection = connectDB();
+    
+        String email = "t@gmail.com";
+        String campo = "email";
+        try {
+    
+            String query = "SELECT * FROM utente WHERE " + campo + " = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+    
+            pstmt.setString(1, email);
+    
+            ResultSet rs = pstmt.executeQuery();
+    
+            if (rs.next()) {
+    
+                nomeCampo.setText(rs.getString("nome"));
+                cognomeCampo.setText(rs.getString("cognome"));
+                emailCampo.setText(rs.getString("email"));
+                telefonoCampo.setText(rs.getString("telefono"));
+                ddnCampo.setText(rs.getString("data_nascita"));
+                
+
+
+            } else {
+                System.out.println("No account found with email: " + email);
+            }
+    
+        } catch (SQLException e) {
+            System.out.println("Error executing SQL query");
+            e.printStackTrace();
+        }
+    }
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -91,12 +129,12 @@ public class Account extends javax.swing.JFrame {
         CaricaLabel.setText("Carica gli attestati");
 
         PicturUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/user.png"))); // NOI18N
+        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("img/user.png"))); // NOI18N
 
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomeLabel.setText("Benvenuto Tommaso");
+        WelcomeLabel.setText("Benvenuto !");
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
@@ -163,28 +201,28 @@ public class Account extends javax.swing.JFrame {
         nomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         nomeLabel.setText("Nome");
 
-        nomeCampo.setText("Tommaso");
+       // nomeCampo.setText("Tommaso");
 
         cognomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         cognomeLabel.setText("Cognome");
         cognomeLabel.setPreferredSize(new java.awt.Dimension(37, 18));
 
-        cognomeCampo.setText("Polvere");
+      //  cognomeCampo.setText("Polvere");
 
         ddnLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         ddnLabel.setText("Data di Nascita");
 
-        ddnCampo.setText("18-09-2005");
+       // ddnCampo.setText("18-09-2005");
 
         telefonoLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         telefonoLabel.setText("Telefono");
 
-        telefonoCampo.setText("+3945692381");
+       // telefonoCampo.setText("+3945692381");
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         emailLabel.setText("E-mail");
 
-        emailCampo.setText("tommasopolvere18@gmail.com");
+      //  emailCampo.setText("tommasopolvere18@gmail.com");
 
         javax.swing.GroupLayout DatiLayout = new javax.swing.GroupLayout(Dati);
         Dati.setLayout(DatiLayout);

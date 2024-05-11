@@ -62,7 +62,7 @@ public class Home extends javax.swing.JFrame {
         CaricaLabel.setText("Carica gli attestati");
 
         PicturUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/user.png"))); // NOI18N
+        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
 
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -135,7 +135,7 @@ public class Home extends javax.swing.JFrame {
         VisualizzaBTN.setText("Visualizza Impiegati");
 
         imgVisualizza.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imgVisualizza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/worker.png"))); // NOI18N
+        imgVisualizza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/worker.png"))); // NOI18N
 
         javax.swing.GroupLayout Visualizza_impiegatiLayout = new javax.swing.GroupLayout(Visualizza_impiegati);
         Visualizza_impiegati.setLayout(Visualizza_impiegatiLayout);
@@ -166,7 +166,7 @@ public class Home extends javax.swing.JFrame {
         VisualizzaBTN1.setText("Aggiungi Impiegato");
 
         imgAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imgAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/add.png"))); // NOI18N
+        imgAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
 
         javax.swing.GroupLayout Aggiungi_impiegatoLayout = new javax.swing.GroupLayout(Aggiungi_impiegato);
         Aggiungi_impiegato.setLayout(Aggiungi_impiegatoLayout);
@@ -197,7 +197,7 @@ public class Home extends javax.swing.JFrame {
         VisualizzaBTN2.setText("Aggiungi Formazione");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/formazione.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/formazione.png"))); // NOI18N
 
         javax.swing.GroupLayout Aggiungi_formazioneLayout = new javax.swing.GroupLayout(Aggiungi_formazione);
         Aggiungi_formazione.setLayout(Aggiungi_formazioneLayout);
