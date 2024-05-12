@@ -62,7 +62,7 @@ public class Home extends javax.swing.JFrame {
         CaricaLabel.setText("Carica gli attestati");
 
         PicturUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
+        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/user.png"))); // NOI18N
 
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -135,7 +135,7 @@ public class Home extends javax.swing.JFrame {
         VisualizzaBTN.setText("Visualizza Impiegati");
 
         imgVisualizza.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imgVisualizza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/worker.png"))); // NOI18N
+        imgVisualizza.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/worker.png"))); // NOI18N
 
         javax.swing.GroupLayout Visualizza_impiegatiLayout = new javax.swing.GroupLayout(Visualizza_impiegati);
         Visualizza_impiegati.setLayout(Visualizza_impiegatiLayout);
@@ -166,7 +166,7 @@ public class Home extends javax.swing.JFrame {
         VisualizzaBTN1.setText("Aggiungi Impiegato");
 
         imgAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        imgAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/add.png"))); // NOI18N
+        imgAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/add.png"))); // NOI18N
 
         javax.swing.GroupLayout Aggiungi_impiegatoLayout = new javax.swing.GroupLayout(Aggiungi_impiegato);
         Aggiungi_impiegato.setLayout(Aggiungi_impiegatoLayout);
@@ -197,7 +197,7 @@ public class Home extends javax.swing.JFrame {
         VisualizzaBTN2.setText("Aggiungi Formazione");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/formazione.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/formazione.png"))); // NOI18N
 
         javax.swing.GroupLayout Aggiungi_formazioneLayout = new javax.swing.GroupLayout(Aggiungi_formazione);
         Aggiungi_formazione.setLayout(Aggiungi_formazioneLayout);
@@ -225,7 +225,7 @@ public class Home extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(Sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -235,7 +235,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(Aggiungi_impiegato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(Aggiungi_formazione, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(120, Short.MAX_VALUE))
+                        .addContainerGap(126, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(Topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -243,7 +243,7 @@ public class Home extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -253,7 +253,7 @@ public class Home extends javax.swing.JFrame {
                             .addComponent(Visualizza_impiegati, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Aggiungi_impiegato, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                             .addComponent(Aggiungi_formazione, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

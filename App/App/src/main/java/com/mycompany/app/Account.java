@@ -129,12 +129,12 @@ public class Account extends javax.swing.JFrame {
         CaricaLabel.setText("Carica gli attestati");
 
         PicturUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("img/user.png"))); // NOI18N
+        PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/user.png"))); // NOI18N
 
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomeLabel.setText("Benvenuto !");
+        WelcomeLabel.setText("Benvenuto Tommaso");
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
@@ -201,28 +201,28 @@ public class Account extends javax.swing.JFrame {
         nomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         nomeLabel.setText("Nome");
 
-       // nomeCampo.setText("Tommaso");
+        nomeCampo.setText("Tommaso");
 
         cognomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         cognomeLabel.setText("Cognome");
         cognomeLabel.setPreferredSize(new java.awt.Dimension(37, 18));
 
-      //  cognomeCampo.setText("Polvere");
+        cognomeCampo.setText("Polvere");
 
         ddnLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         ddnLabel.setText("Data di Nascita");
 
-       // ddnCampo.setText("18-09-2005");
+        ddnCampo.setText("18-09-2005");
 
         telefonoLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         telefonoLabel.setText("Telefono");
 
-       // telefonoCampo.setText("+3945692381");
+        telefonoCampo.setText("+3945692381");
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         emailLabel.setText("E-mail");
 
-      //  emailCampo.setText("tommasopolvere18@gmail.com");
+        emailCampo.setText("tommasopolvere18@gmail.com");
 
         javax.swing.GroupLayout DatiLayout = new javax.swing.GroupLayout(Dati);
         Dati.setLayout(DatiLayout);
@@ -251,7 +251,7 @@ public class Account extends javax.swing.JFrame {
                                 .addGroup(DatiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ddnLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(ddnCampo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         DatiLayout.setVerticalGroup(
             DatiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +276,7 @@ public class Account extends javax.swing.JFrame {
                 .addGroup(DatiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telefonoCampo)
                     .addComponent(emailCampo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,7 +284,7 @@ public class Account extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(Sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,17 +293,15 @@ public class Account extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Topbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(Dati, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
 
         pack();
