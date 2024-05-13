@@ -5,6 +5,12 @@ public class Home extends javax.swing.JFrame {
     
     public Home() {
         initComponents();
+        
+    }
+    
+    public void setWelcome(String email){
+        
+        WelcomeLabel.setText("Benvenuto/a "+email);
     }
 
   
