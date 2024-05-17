@@ -5,11 +5,34 @@ import java.sql.*;
 
 public class Account extends javax.swing.JFrame {
 
+    public String email;
     
-    public Account() {
+    public Account(String email) {
+        this.email=email;
         initComponents();
         showAccount();
         
+    }
+
+    public Account(){
+
+        initComponents();
+        showAccount();
+        
+
+    }
+
+    public void setWelcome(String nome){
+        WelcomeLabel.setText(nome);
+    }
+
+    public void setEmail(String emailP){
+
+        this.email=emailP;
+    }
+
+    public String getEmail(){
+        return email;
     }
     
     private Connection connectDB(){
@@ -37,13 +60,16 @@ public class Account extends javax.swing.JFrame {
 
     public void showAccount() {
 
+        Home home=new Home();
+       
+        String email=home.getEmail();
+        System.out.println("Email: "+email);
+
         Connection connection = connectDB();
     
-        String email = "t@gmail.com";
-        String campo = "email";
         try {
     
-            String query = "SELECT * FROM utente WHERE " + campo + " = ?";
+            String query = "SELECT * FROM utente WHERE email = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
     
             pstmt.setString(1, email);
@@ -134,7 +160,7 @@ public class Account extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomeLabel.setText("Benvenuto Tommaso");
+        //WelcomeLabel.setText("Benvenuto Tommaso");
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
@@ -201,28 +227,28 @@ public class Account extends javax.swing.JFrame {
         nomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         nomeLabel.setText("Nome");
 
-        nomeCampo.setText("Tommaso");
+        //nomeCampo.setText("Tommaso");
 
         cognomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         cognomeLabel.setText("Cognome");
         cognomeLabel.setPreferredSize(new java.awt.Dimension(37, 18));
 
-        cognomeCampo.setText("Polvere");
+       // cognomeCampo.setText("Polvere");
 
         ddnLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         ddnLabel.setText("Data di Nascita");
 
-        ddnCampo.setText("18-09-2005");
+        //ddnCampo.setText("18-09-2005");
 
         telefonoLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         telefonoLabel.setText("Telefono");
 
-        telefonoCampo.setText("+3945692381");
+       // telefonoCampo.setText("+3945692381");
 
         emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         emailLabel.setText("E-mail");
 
-        emailCampo.setText("tommasopolvere18@gmail.com");
+        //emailCampo.setText("tommasopolvere18@gmail.com");
 
         javax.swing.GroupLayout DatiLayout = new javax.swing.GroupLayout(Dati);
         Dati.setLayout(DatiLayout);

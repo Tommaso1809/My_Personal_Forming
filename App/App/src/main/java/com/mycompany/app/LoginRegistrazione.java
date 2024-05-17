@@ -42,6 +42,12 @@ public class LoginRegistrazione extends javax.swing.JFrame {
                 if(rs.next()){
                     
                     String nome=rs.getString("nome");
+                    String emailR=rs.getString("email");
+
+                    System.out.println("Email:" + emailR);
+
+                    Account account =new Account(emailR);
+                    //account.setEmail(emailR);
                     
                     Home home=new Home();
                     
@@ -223,6 +229,7 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         passwordCampoAccedi = new javax.swing.JPasswordField();
         accediButton = new javax.swing.JButton();
         notRegister = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Personal Forming - Accesso");
@@ -419,12 +426,17 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         passwordCampoAccedi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         passwordCampoAccedi.setBorder(null);
         passwordCampoAccedi.setMinimumSize(new java.awt.Dimension(64, 22));
+        passwordCampoAccedi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordCampoAccediActionPerformed(evt);
+            }
+        });
 
         accediButton.setBackground(new java.awt.Color(8, 37, 186));
         accediButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         accediButton.setForeground(new java.awt.Color(255, 255, 255));
         accediButton.setText("Accedi");
-        accediButton.setBorder(null);
+        accediButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         accediButton.setBorderPainted(false);
         accediButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -442,6 +454,9 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         notRegister.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         notRegister.setText("Utente non registrato");
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/userLogin.png"))); // NOI18N
+
         javax.swing.GroupLayout Accedi_PanelLayout = new javax.swing.GroupLayout(Accedi_Panel);
         Accedi_Panel.setLayout(Accedi_PanelLayout);
         Accedi_PanelLayout.setHorizontalGroup(
@@ -452,38 +467,42 @@ public class LoginRegistrazione extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Accedi_PanelLayout.createSequentialGroup()
                 .addGap(0, 96, Short.MAX_VALUE)
-                .addGroup(Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(passwordLabel)
-                    .addGroup(Accedi_PanelLayout.createSequentialGroup()
-                        .addComponent(emailLabel)
-                        .addGap(44, 44, 44)
-                        .addComponent(notRegister))
-                    .addComponent(EmailCampoAccedi, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                    .addComponent(passwordCampoAccedi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(accediButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(passwordCampoAccedi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(EmailCampoAccedi, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                        .addComponent(accediButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(Accedi_PanelLayout.createSequentialGroup()
+                            .addGroup(Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(passwordLabel)
+                                .addComponent(emailLabel)
+                                .addGroup(Accedi_PanelLayout.createSequentialGroup()
+                                    .addGap(78, 78, 78)
+                                    .addComponent(notRegister)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
                 .addGap(84, 84, 84))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         Accedi_PanelLayout.setVerticalGroup(
             Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Accedi_PanelLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(AccediLabel)
-                .addGroup(Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Accedi_PanelLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(emailLabel))
-                    .addGroup(Accedi_PanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(notRegister)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(notRegister)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(emailLabel)
+                .addGap(20, 20, 20)
                 .addComponent(EmailCampoAccedi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(passwordLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(20, 20, 20)
                 .addComponent(passwordCampoAccedi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addGap(46, 46, 46)
                 .addComponent(accediButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGap(102, 102, 102))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -497,8 +516,8 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Registrazion_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Accedi_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+            .addComponent(Registrazion_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
+            .addComponent(Accedi_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
         );
 
         pack();
@@ -540,6 +559,10 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_accediButtonActionPerformed
 
+    private void passwordCampoAccediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordCampoAccediActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordCampoAccediActionPerformed
+
     
     public static void main(String args[]) {
         
@@ -568,6 +591,7 @@ public class LoginRegistrazione extends javax.swing.JFrame {
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel emailLabelRegistazione;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel notRegister;
     private javax.swing.JPasswordField passwordCampoAccedi;
     private javax.swing.JPasswordField passwordCampoRegistrazione;

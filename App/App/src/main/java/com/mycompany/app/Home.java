@@ -2,15 +2,32 @@ package com.mycompany.app;
 
 public class Home extends javax.swing.JFrame {
 
-    
-    public Home() {
+    public String email;
+
+    public Home(String email) {
+        this.email=email;
         initComponents();
         
+    }
+
+    public Home(){
+        initComponents();
+        this.email=email;
+    }
+
+    public String getEmail(){
+        return email;
     }
     
     public void setWelcome(String email){
         
         WelcomeLabel.setText("Benvenuto/a "+email);
+    }
+
+    public String getWelcome(){
+
+        String nome=WelcomeLabel.getText();
+        return nome;
     }
 
   
@@ -267,7 +284,11 @@ public class Home extends javax.swing.JFrame {
 
     private void AccountLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AccountLabelMouseClicked
 
-        Account account =new Account();
+        Account account =new Account(email);
+
+        String nome=getWelcome();
+        account.setWelcome(nome);
+
         account.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_AccountLabelMouseClicked
