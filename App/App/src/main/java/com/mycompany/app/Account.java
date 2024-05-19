@@ -2,73 +2,50 @@ package com.mycompany.app;
 
 import java.sql.*;
 
+import javax.swing.ImageIcon;
+
 
 public class Account extends javax.swing.JFrame {
-
-    public String email;
     
-    public Account(String email) {
-        this.email=email;
+    public Account() {
+       
         initComponents();
+        setIconForm();
+        setWelcome();
         showAccount();
         
     }
 
-    public Account(){
+    public void setIconForm(){
 
-        initComponents();
-        showAccount();
-        
+        ImageIcon icon = new ImageIcon(LoginRegistrazione.class.getResource("img/iconaForm.png"));
+        setIconImage(icon.getImage());
 
     }
 
-    public void setWelcome(String nome){
-        WelcomeLabel.setText(nome);
-    }
+    public void setWelcome(){
 
-    public void setEmail(String emailP){
+        Session session=new Session();
 
-        this.email=emailP;
-    }
+        String nome=session.getNome();
+        WelcomeLabel.setText("Benvenuto/a "+nome);
 
-    public String getEmail(){
-        return email;
-    }
-    
-    private Connection connectDB(){
-        
-        try{
-            String url="jdbc:mysql://localhost:3306/my_personal_forming";
-            String username="root";
-            String password="";
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection=DriverManager.getConnection(url,username,password);
-            
-            return connection;
-            
-            
-            
-        }catch(SQLException s){
-            s.printStackTrace();
-            return null;
-        }
-        catch(ClassNotFoundException c){
-            c.printStackTrace();
-            return null;
-        }
     }
 
     public void showAccount() {
+    
+    
+        DBHanderl database=new DBHanderl("jdbc:mysql://localhost:3306/my_personal_forming","root","");
 
-        Home home=new Home();
-       
-        String email=home.getEmail();
-        System.out.println("Email: "+email);
-
-        Connection connection = connectDB();
     
         try {
     
+            Connection connection=database.getConnection();
+
+            Session session=new Session();
+
+            String email=session.getEmail();
+
             String query = "SELECT * FROM utente WHERE email = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
     
@@ -87,7 +64,7 @@ public class Account extends javax.swing.JFrame {
 
 
             } else {
-                System.out.println("No account found with email: " + email);
+                
             }
     
         } catch (SQLException e) {

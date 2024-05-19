@@ -1,35 +1,34 @@
 package com.mycompany.app;
 
+import javax.swing.ImageIcon;
+
 public class Home extends javax.swing.JFrame {
 
-    public String email;
-
-    public Home(String email) {
-        this.email=email;
-        initComponents();
-        
-    }
-
-    public Home(){
-        initComponents();
-        this.email=email;
-    }
-
-    public String getEmail(){
-        return email;
-    }
     
-    public void setWelcome(String email){
+
+    public Home() {
+        initComponents();
+        setIconForm();
+        setWelcome();
+    }
+
+    
+    public void setWelcome(){
         
-        WelcomeLabel.setText("Benvenuto/a "+email);
+        Session session=new Session();
+        String nome=session.getNome();
+
+        WelcomeLabel.setText("Benvenuto/a "+nome);
     }
 
-    public String getWelcome(){
+    public void setIconForm(){
 
-        String nome=WelcomeLabel.getText();
-        return nome;
+        ImageIcon icon = new ImageIcon(LoginRegistrazione.class.getResource("img/iconaForm.png"));
+        setIconImage(icon.getImage());
+
     }
 
+    
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -90,7 +89,7 @@ public class Home extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomeLabel.setText("Benvenuto Tommaso");
+       
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
@@ -184,9 +183,16 @@ public class Home extends javax.swing.JFrame {
         Aggiungi_impiegato.setBackground(new java.awt.Color(255, 255, 255));
         Aggiungi_impiegato.setPreferredSize(new java.awt.Dimension(154, 136));
 
+        Aggiungi_impiegato.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Aggiungi_impiegatoMouseClicked(evt);
+            }
+        });
+
         VisualizzaBTN1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         VisualizzaBTN1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         VisualizzaBTN1.setText("Aggiungi Impiegato");
+        
 
         imgAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/add.png"))); // NOI18N
@@ -284,13 +290,16 @@ public class Home extends javax.swing.JFrame {
 
     private void AccountLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AccountLabelMouseClicked
 
-        Account account =new Account(email);
+       /*  String nome=getWelcome();
+        String email=getEmail();*/
 
-        String nome=getWelcome();
-        account.setWelcome(nome);
+        Account account=new Account();
+        //account.setWelcome(nome);
+      //  account.setEmail(email);
 
         account.setVisible(true);
         setVisible(false);
+
     }//GEN-LAST:event_AccountLabelMouseClicked
 
     private void Visualizza_impiegatiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Visualizza_impiegatiMouseClicked
@@ -299,6 +308,13 @@ public class Home extends javax.swing.JFrame {
         dipendenti.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_Visualizza_impiegatiMouseClicked
+
+    private void Aggiungi_impiegatoMouseClicked(java.awt.event.MouseEvent evt){
+
+        Aggiungi aggiungi=new Aggiungi();
+        aggiungi.setVisible(true);
+        setVisible(false);
+    }
 
     public static void main(String args[]) {
         
