@@ -82,6 +82,11 @@ public class Home extends javax.swing.JFrame {
         CaricaLabel.setForeground(new java.awt.Color(255, 255, 255));
         CaricaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CaricaLabel.setText("Carica gli attestati");
+        CaricaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CaricaLabelMouseClicked(evt);
+            }
+        });
 
         PicturUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/user.png"))); // NOI18N
@@ -89,7 +94,7 @@ public class Home extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-       
+        WelcomeLabel.setText("Benvenuto Tommaso");
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
@@ -183,16 +188,9 @@ public class Home extends javax.swing.JFrame {
         Aggiungi_impiegato.setBackground(new java.awt.Color(255, 255, 255));
         Aggiungi_impiegato.setPreferredSize(new java.awt.Dimension(154, 136));
 
-        Aggiungi_impiegato.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Aggiungi_impiegatoMouseClicked(evt);
-            }
-        });
-
         VisualizzaBTN1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         VisualizzaBTN1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         VisualizzaBTN1.setText("Aggiungi Impiegato");
-        
 
         imgAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/add.png"))); // NOI18N
@@ -308,6 +306,13 @@ public class Home extends javax.swing.JFrame {
         dipendenti.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_Visualizza_impiegatiMouseClicked
+
+    private void CaricaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CaricaLabelMouseClicked
+       
+        CaricaAttestati carica=new CaricaAttestati();
+        carica.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_CaricaLabelMouseClicked
 
     private void Aggiungi_impiegatoMouseClicked(java.awt.event.MouseEvent evt){
 
