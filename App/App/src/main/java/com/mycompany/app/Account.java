@@ -35,7 +35,7 @@ public class Account extends javax.swing.JFrame {
     public void showAccount() {
     
     
-        DBHanderl database=new DBHanderl("jdbc:mysql://localhost:3306/my_personal_forming","root","");
+        DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
 
     
         try {
