@@ -147,6 +147,10 @@ public class LoginRegistrazione extends javax.swing.JFrame {
                     
                     pstmt.executeUpdate();
                     
+                    Session sessione=new Session();
+                    sessione.setNome(nome);
+                    sessione.setEmail(email);
+                    
                     Home home=new Home();
                     home.setVisible(true);
                     setVisible(false);

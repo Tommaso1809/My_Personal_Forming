@@ -6,12 +6,15 @@ com\mycompany\app\CaricaAttestati$2.class
 com\mycompany\app\LoginRegistrazione$11.class
 com\mycompany\app\LoginRegistrazione$8.class
 com\mycompany\app\Account$1.class
+com\mycompany\app\Dipendenti$3.class
 com\mycompany\app\CaricaAttestati.class
 com\mycompany\app\Home$2.class
 com\mycompany\app\LoginRegistrazione$7.class
 com\mycompany\app\Home.class
 com\mycompany\app\Aggiungi$3.class
+com\mycompany\app\CaricaAttestati$6.class
 com\mycompany\app\CaricaAttestati$3.class
+com\mycompany\app\Dipendenti$4.class
 com\mycompany\app\CaricaAttestati$4.class
 com\mycompany\app\Home$3.class
 com\mycompany\app\LoginRegistrazione$9.class
@@ -22,8 +25,10 @@ com\mycompany\app\Aggiungi$2.class
 com\mycompany\app\LoginRegistrazione$6.class
 com\mycompany\app\Dipendenti.class
 com\mycompany\app\LoginRegistrazione$3.class
+com\mycompany\app\CaricaAttestati$5.class
 com\mycompany\app\Account.class
 com\mycompany\app\LoginRegistrazione$10.class
+com\mycompany\app\Aggiungi$7.class
 com\mycompany\app\LoginRegistrazione$5.class
 com\mycompany\app\CaricaAttestati$1.class
 com\mycompany\app\Aggiungi$1.class

@@ -3,6 +3,8 @@ package com.mycompany.app;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
@@ -143,6 +145,11 @@ public class Aggiungi extends javax.swing.JFrame {
         CaricaLabel.setForeground(new java.awt.Color(255, 255, 255));
         CaricaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CaricaLabel.setText("Carica gli attestati");
+        CaricaLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CaricaLabelMouseClicked(evt);
+            }
+        });
 
         PicturUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         PicturUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/user.png"))); // NOI18N
@@ -399,6 +406,19 @@ public class Aggiungi extends javax.swing.JFrame {
         
         addImpiegato();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void CaricaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CaricaLabelMouseClicked
+        
+        CaricaAttestati carica;
+        try {
+            carica = new CaricaAttestati();
+            carica.setVisible(true);
+            setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(Aggiungi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_CaricaLabelMouseClicked
 
     /**
      * @param args the command line arguments

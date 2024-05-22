@@ -1,5 +1,8 @@
 package com.mycompany.app;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public class Home extends javax.swing.JFrame {
@@ -187,6 +190,11 @@ public class Home extends javax.swing.JFrame {
 
         Aggiungi_impiegato.setBackground(new java.awt.Color(255, 255, 255));
         Aggiungi_impiegato.setPreferredSize(new java.awt.Dimension(154, 136));
+        Aggiungi_impiegato.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Aggiungi_impiegatoMouseClicked(evt);
+            }
+        });
 
         VisualizzaBTN1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         VisualizzaBTN1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -309,9 +317,14 @@ public class Home extends javax.swing.JFrame {
 
     private void CaricaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CaricaLabelMouseClicked
        
-        CaricaAttestati carica=new CaricaAttestati();
-        carica.setVisible(true);
-        setVisible(false);
+        CaricaAttestati carica;
+        try {
+            carica = new CaricaAttestati();
+            carica.setVisible(true);
+            setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(Aggiungi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_CaricaLabelMouseClicked
 
     private void Aggiungi_impiegatoMouseClicked(java.awt.event.MouseEvent evt){

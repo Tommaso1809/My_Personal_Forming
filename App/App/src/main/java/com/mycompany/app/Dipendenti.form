@@ -150,6 +150,9 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Carica gli attestati"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CaricaLabelMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="PicturUser">
           <Properties>
@@ -168,7 +171,6 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Benvenuto Tommaso"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -227,7 +229,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="dipendentiLabel" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="dipendentiLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="427" max="-2" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="nomeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -243,9 +248,21 @@
                               <Component id="ruoloCampo" max="32767" attributes="0"/>
                               <Component id="ruoloLabel" max="32767" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="emailLabel" pref="82" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="335" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="emailCampo" min="-2" pref="93" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="scaricaAttestati" min="-2" pref="139" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="427" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -259,14 +276,24 @@
                       <Component id="nomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cognomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ruoloLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nomeCampo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cognomeCampo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ruoloCampo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="nomeCampo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cognomeCampo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ruoloCampo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="emailCampo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                          <Component id="scaricaAttestati" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="288" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -289,9 +316,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="nomeCampo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Tommaso"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="cognomeLabel">
           <Properties>
@@ -302,9 +326,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="cognomeCampo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Polvere"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="ruoloLabel">
           <Properties>
@@ -315,9 +336,28 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="ruoloCampo">
+        </Component>
+        <Component class="javax.swing.JLabel" name="emailLabel">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sviluppatore"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="13" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Email"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="emailCampo">
+        </Component>
+        <Component class="javax.swing.JLabel" name="scaricaAttestati">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Scarica tutti gli attestati"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="scaricaAttestatiMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

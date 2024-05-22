@@ -227,18 +227,23 @@
                       <Component id="FileChooserAttestati" min="-2" pref="618" max="-2" attributes="0"/>
                       <Component id="dipendentiLabel" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="nomeFormazioneField" min="-2" pref="163" max="-2" attributes="0"/>
-                              <Component id="nomeFormazioneLabel1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="nomeFormazioneLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="dropDownAttestati" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="dataFormazioneLabel" min="-2" max="-2" attributes="0"/>
                               <Component id="dataFormazioneField" min="-2" pref="163" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="167" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -247,15 +252,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="dipendentiLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="57" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="dataFormazioneLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="nomeFormazioneLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nomeFormazioneField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="dataFormazioneField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dropDownAttestati" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="FileChooserAttestati" min="-2" pref="294" max="-2" attributes="0"/>
@@ -293,11 +298,6 @@
             <Property name="text" type="java.lang.String" value="Data Formazione"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nomeFormazioneField">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JTextField" name="dataFormazioneField">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
@@ -310,6 +310,24 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nome Formazione"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="dropDownAttestati">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="0"/>
+            </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                <EtchetBorder/>
+              </Border>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dropDownAttestatiActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

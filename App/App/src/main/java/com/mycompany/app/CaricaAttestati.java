@@ -25,12 +25,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class CaricaAttestati extends javax.swing.JFrame {
 
+    public static  String nome_formazione;
     
-    public CaricaAttestati() {
+    public CaricaAttestati() throws SQLException {
         initComponents();
         setIconForm();
         setWelcome();
         getFile();
+        setComboBox();
         
     }
 
@@ -39,6 +41,26 @@ public class CaricaAttestati extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(LoginRegistrazione.class.getResource("img/iconaForm.png"));
         setIconImage(icon.getImage());
 
+    }
+    
+    public void setComboBox() throws SQLException{
+        
+         
+          
+            DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
+            Connection connection = database.getConnection();
+
+            String sql="SELECT nomeFormazione FROM formazione";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            
+            ResultSet rs = stmt.executeQuery();
+
+      
+            // Populate the JComboBox with the data from the database
+            while (rs.next()) {
+                dropDownAttestati.addItem(rs.getString("nomeFormazione"));
+            }
+        
     }
     
     public void setWelcome(){
@@ -82,7 +104,17 @@ public class CaricaAttestati extends javax.swing.JFrame {
         PreparedStatement pstmt = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 
         
-        String nome_formazione=nomeFormazioneField.getText();
+        
+        
+        dropDownAttestati.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                 nome_formazione = (String) dropDownAttestati.getSelectedItem();
+            }
+        });
+        
+        System.out.println(nome_formazione);
+       
         String data_formazione=dataFormazioneField.getText();
         byte[] fileData = FileUtils.readFileToByteArray(file);
         pstmt.setString(1, nome_formazione);
@@ -129,9 +161,9 @@ public class CaricaAttestati extends javax.swing.JFrame {
         dipendentiLabel = new javax.swing.JLabel();
         FileChooserAttestati = new javax.swing.JFileChooser();
         dataFormazioneLabel = new javax.swing.JLabel();
-        nomeFormazioneField = new javax.swing.JTextField();
         dataFormazioneField = new javax.swing.JTextField();
         nomeFormazioneLabel1 = new javax.swing.JLabel();
+        dropDownAttestati = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Personal Forming - Carica Attestati");
@@ -243,12 +275,17 @@ public class CaricaAttestati extends javax.swing.JFrame {
         dataFormazioneLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         dataFormazioneLabel.setText("Data Formazione");
 
-        nomeFormazioneField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         dataFormazioneField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         nomeFormazioneLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         nomeFormazioneLabel1.setText("Nome Formazione");
+
+        dropDownAttestati.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        dropDownAttestati.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dropDownAttestatiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout DipendentiLayout = new javax.swing.GroupLayout(Dipendenti);
         Dipendenti.setLayout(DipendentiLayout);
@@ -260,28 +297,31 @@ public class CaricaAttestati extends javax.swing.JFrame {
                     .addComponent(FileChooserAttestati, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dipendentiLabel)
                     .addGroup(DipendentiLayout.createSequentialGroup()
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeFormazioneField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nomeFormazioneLabel1))
-                        .addGap(93, 93, 93)
+                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(DipendentiLayout.createSequentialGroup()
+                                .addComponent(nomeFormazioneLabel1)
+                                .addGap(154, 154, 154))
+                            .addGroup(DipendentiLayout.createSequentialGroup()
+                                .addComponent(dropDownAttestati, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(130, 130, 130)))
                         .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dataFormazioneLabel)
                             .addComponent(dataFormazioneField, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         DipendentiLayout.setVerticalGroup(
             DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DipendentiLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(dipendentiLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dataFormazioneLabel)
                     .addComponent(nomeFormazioneLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeFormazioneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataFormazioneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataFormazioneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dropDownAttestati, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addComponent(FileChooserAttestati, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62))
@@ -331,6 +371,15 @@ public class CaricaAttestati extends javax.swing.JFrame {
     
     }//GEN-LAST:event_FileChooserAttestatiActionPerformed
 
+    private void dropDownAttestatiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dropDownAttestatiActionPerformed
+       
+       
+        CaricaAttestati.nome_formazione = (String) dropDownAttestati.getSelectedItem();
+      
+        
+    }//GEN-LAST:event_dropDownAttestatiActionPerformed
+
+     
     /**
      * @param args the command line arguments
      */
@@ -368,7 +417,11 @@ public class CaricaAttestati extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CaricaAttestati().setVisible(true);
+                try {
+                    new CaricaAttestati().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CaricaAttestati.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -386,7 +439,7 @@ public class CaricaAttestati extends javax.swing.JFrame {
     private javax.swing.JTextField dataFormazioneField;
     private javax.swing.JLabel dataFormazioneLabel;
     private javax.swing.JLabel dipendentiLabel;
-    private javax.swing.JTextField nomeFormazioneField;
+    private javax.swing.JComboBox<String> dropDownAttestati;
     private javax.swing.JLabel nomeFormazioneLabel1;
     private javax.swing.JLabel titleBar;
     // End of variables declaration//GEN-END:variables
