@@ -58,7 +58,7 @@ public class Account extends javax.swing.JFrame {
                 nomeCampo.setText(rs.getString("nome"));
                 cognomeCampo.setText(rs.getString("cognome"));
                 emailCampo.setText(rs.getString("email"));
-                telefonoCampo.setText(rs.getString("telefono"));
+                telefonoCampo.setText("+39 "+rs.getString("telefono"));
                 ddnCampo.setText(rs.getString("data_nascita"));
                 
 
@@ -125,6 +125,11 @@ public class Account extends javax.swing.JFrame {
         CorsiLabel.setForeground(new java.awt.Color(255, 255, 255));
         CorsiLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CorsiLabel.setText("Corsi di formazione");
+        CorsiLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CorsiLabelMouseClicked(evt);
+            }
+        });
 
         CaricaLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CaricaLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,7 +142,7 @@ public class Account extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        //WelcomeLabel.setText("Benvenuto Tommaso");
+        WelcomeLabel.setText("Benvenuto Tommaso");
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
@@ -204,28 +209,18 @@ public class Account extends javax.swing.JFrame {
         nomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         nomeLabel.setText("Nome");
 
-        //nomeCampo.setText("Tommaso");
-
         cognomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         cognomeLabel.setText("Cognome");
         cognomeLabel.setPreferredSize(new java.awt.Dimension(37, 18));
 
-       // cognomeCampo.setText("Polvere");
-
         ddnLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         ddnLabel.setText("Data di Nascita");
-
-        //ddnCampo.setText("18-09-2005");
 
         telefonoLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         telefonoLabel.setText("Telefono");
 
-       // telefonoCampo.setText("+3945692381");
-
         emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         emailLabel.setText("E-mail");
-
-        //emailCampo.setText("tommasopolvere18@gmail.com");
 
         javax.swing.GroupLayout DatiLayout = new javax.swing.GroupLayout(Dati);
         Dati.setLayout(DatiLayout);
@@ -279,7 +274,7 @@ public class Account extends javax.swing.JFrame {
                 .addGroup(DatiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telefonoCampo)
                     .addComponent(emailCampo))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addContainerGap(282, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -315,6 +310,12 @@ public class Account extends javax.swing.JFrame {
         home.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_HomeLabelMouseClicked
+
+    private void CorsiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CorsiLabelMouseClicked
+        VisualizzaCorsi corsi = new VisualizzaCorsi();
+        corsi.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_CorsiLabelMouseClicked
 
     
     public static void main(String args[]) {

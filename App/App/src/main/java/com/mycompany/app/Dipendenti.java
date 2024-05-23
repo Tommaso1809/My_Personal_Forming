@@ -2,6 +2,8 @@
 package com.mycompany.app;
 
 import java.awt.Desktop;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Dipendenti extends javax.swing.JFrame {
 
@@ -56,26 +59,48 @@ public class Dipendenti extends javax.swing.JFrame {
 
             String email=session.getEmail();
 
-            String query = "SELECT * FROM utente WHERE email = ?";
+            String query = "SELECT * FROM utente WHERE NOT email = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
     
             pstmt.setString(1, email);
     
             ResultSet rs = pstmt.executeQuery();
     
-            if (rs.next()) {
+            
     
-                nomeCampo.setText(rs.getString("nome"));
-                cognomeCampo.setText(rs.getString("cognome"));
-                emailCampo.setText(rs.getString("email"));
-                ruoloCampo.setText(rs.getString("ruolo"));
-               // ddnCampo.setText(rs.getString("data_nascita"));
-                
-
-
-            } else {
-                
+            while (rs.next()) {
+                Object[] rowData = new Object[5];
+                rowData[0] = rs.getString("nome");
+                rowData[1] = rs.getString("cognome");
+                rowData[2] = rs.getString("email");
+                rowData[3] = rs.getString("ruolo");
+                rowData[4] = "Scarica tutti gli attestati";
+                DefaultTableModel model = (DefaultTableModel) Table.getModel();
+                model.addRow(rowData);
             }
+            
+            Table.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2) {
+                        int row = Table.rowAtPoint(e.getPoint());
+                        if (row >= 0 && row < Table.getRowCount()) {
+                            Object id = Table.getValueAt(row, 0);
+                            
+                            Session sessione=new Session();
+                            sessione.setIDCorso(id);
+                            
+                            VisualizzaInfo info=new VisualizzaInfo();
+                            info.setVisible(true);
+                            setVisible(false);
+                            
+                            /*JOptionPane.showMessageDialog(VisualizzaCorsi.this, "ID: " + id + "\nNome Formazione: " + nomeFormazione +
+                                    "\nDurata Formazione: " + durataFormazione + "\nCategoria: " + categoria + "\nStato: " + stato);*/
+                        }
+                    }
+                }
+            });
+
+
     
         } catch (SQLException e) {
             System.out.println("Error executing SQL query");
@@ -141,21 +166,15 @@ public class Dipendenti extends javax.swing.JFrame {
         titleBar = new javax.swing.JLabel();
         Dipendenti = new javax.swing.JPanel();
         dipendentiLabel = new javax.swing.JLabel();
-        nomeLabel = new javax.swing.JLabel();
-        nomeCampo = new javax.swing.JLabel();
-        cognomeLabel = new javax.swing.JLabel();
-        cognomeCampo = new javax.swing.JLabel();
-        ruoloLabel = new javax.swing.JLabel();
-        ruoloCampo = new javax.swing.JLabel();
-        emailLabel = new javax.swing.JLabel();
-        emailCampo = new javax.swing.JLabel();
-        scaricaAttestati = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Personal Forming - Dipendenti");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
+        setPreferredSize(new java.awt.Dimension(1030, 537));
         setResizable(false);
         setSize(new java.awt.Dimension(1500, 200));
 
@@ -176,6 +195,11 @@ public class Dipendenti extends javax.swing.JFrame {
         CorsiLabel.setForeground(new java.awt.Color(255, 255, 255));
         CorsiLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CorsiLabel.setText("Corsi di formazione");
+        CorsiLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CorsiLabelMouseClicked(evt);
+            }
+        });
 
         CaricaLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CaricaLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -237,7 +261,7 @@ public class Dipendenti extends javax.swing.JFrame {
             TopbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TopbarLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titleBar, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
                 .addContainerGap())
         );
         TopbarLayout.setVerticalGroup(
@@ -253,26 +277,37 @@ public class Dipendenti extends javax.swing.JFrame {
         dipendentiLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         dipendentiLabel.setText("DIPENDENTI");
 
-        nomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        nomeLabel.setText("Nome");
+        Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        cognomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        cognomeLabel.setText("Cognome");
+            },
+            new String [] {
+                "Nome", "Cognome", "E-mail", "Ruolo", "Azione"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        ruoloLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        ruoloLabel.setText("Ruolo");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        emailLabel.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        emailLabel.setText("Email");
-
-        scaricaAttestati.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        scaricaAttestati.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        scaricaAttestati.setText("Scarica tutti gli attestati");
-        scaricaAttestati.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                scaricaAttestatiMouseClicked(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(Table);
+        if (Table.getColumnModel().getColumnCount() > 0) {
+            Table.getColumnModel().getColumn(0).setResizable(false);
+            Table.getColumnModel().getColumn(1).setResizable(false);
+            Table.getColumnModel().getColumn(2).setResizable(false);
+            Table.getColumnModel().getColumn(3).setResizable(false);
+            Table.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         javax.swing.GroupLayout DipendentiLayout = new javax.swing.GroupLayout(Dipendenti);
         Dipendenti.setLayout(DipendentiLayout);
@@ -281,55 +316,18 @@ public class Dipendenti extends javax.swing.JFrame {
             .addGroup(DipendentiLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DipendentiLayout.createSequentialGroup()
-                        .addComponent(dipendentiLabel)
-                        .addGap(427, 427, 427))
-                    .addGroup(DipendentiLayout.createSequentialGroup()
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomeLabel)
-                            .addComponent(nomeCampo))
-                        .addGap(70, 70, 70)
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cognomeLabel)
-                            .addComponent(cognomeCampo))
-                        .addGap(70, 70, 70)
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ruoloCampo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ruoloLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(70, 70, 70)
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DipendentiLayout.createSequentialGroup()
-                                .addComponent(emailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
-                                .addGap(335, 335, 335))
-                            .addGroup(DipendentiLayout.createSequentialGroup()
-                                .addComponent(emailCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(scaricaAttestati, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                    .addComponent(dipendentiLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DipendentiLayout.setVerticalGroup(
             DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DipendentiLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(dipendentiLabel)
-                .addGap(35, 35, 35)
-                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeLabel)
-                    .addComponent(cognomeLabel)
-                    .addComponent(ruoloLabel)
-                    .addComponent(emailLabel))
-                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DipendentiLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nomeCampo)
-                            .addComponent(cognomeCampo)
-                            .addComponent(ruoloCampo)
-                            .addComponent(emailCampo)))
-                    .addGroup(DipendentiLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(scaricaAttestati)))
-                .addContainerGap())
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -381,16 +379,12 @@ public class Dipendenti extends javax.swing.JFrame {
         
     }//GEN-LAST:event_CaricaLabelMouseClicked
 
-    private void scaricaAttestatiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scaricaAttestatiMouseClicked
+    private void CorsiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CorsiLabelMouseClicked
         
-        try {
-            downloadPDFFromDB();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Errore durante il download del file: " + ex.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Errore durante il download del file: " + ex.getMessage(), "Errore", JOptionPane.ERROR_MESSAGE);
-        }    
-    }//GEN-LAST:event_scaricaAttestatiMouseClicked
+        VisualizzaCorsi corsi = new VisualizzaCorsi();
+        corsi.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_CorsiLabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -437,18 +431,11 @@ public class Dipendenti extends javax.swing.JFrame {
     private javax.swing.JLabel HomeLabel;
     private javax.swing.JLabel PicturUser;
     private javax.swing.JPanel Sidebar;
+    private javax.swing.JTable Table;
     private javax.swing.JPanel Topbar;
     private javax.swing.JLabel WelcomeLabel;
-    private javax.swing.JLabel cognomeCampo;
-    private javax.swing.JLabel cognomeLabel;
     private javax.swing.JLabel dipendentiLabel;
-    private javax.swing.JLabel emailCampo;
-    private javax.swing.JLabel emailLabel;
-    private javax.swing.JLabel nomeCampo;
-    private javax.swing.JLabel nomeLabel;
-    private javax.swing.JLabel ruoloCampo;
-    private javax.swing.JLabel ruoloLabel;
-    private javax.swing.JLabel scaricaAttestati;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel titleBar;
     // End of variables declaration//GEN-END:variables
 }

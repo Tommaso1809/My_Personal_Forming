@@ -140,6 +140,11 @@ public class Aggiungi extends javax.swing.JFrame {
         CorsiLabel.setForeground(new java.awt.Color(255, 255, 255));
         CorsiLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CorsiLabel.setText("Corsi di formazione");
+        CorsiLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CorsiLabelMouseClicked(evt);
+            }
+        });
 
         CaricaLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CaricaLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -409,16 +414,24 @@ public class Aggiungi extends javax.swing.JFrame {
 
     private void CaricaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CaricaLabelMouseClicked
         
-        CaricaAttestati carica;
+        
         try {
+            CaricaAttestati carica;
             carica = new CaricaAttestati();
             carica.setVisible(true);
             setVisible(false);
         } catch (SQLException ex) {
-            Logger.getLogger(Aggiungi.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         
     }//GEN-LAST:event_CaricaLabelMouseClicked
+
+    private void CorsiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CorsiLabelMouseClicked
+        
+        VisualizzaCorsi corsi = new VisualizzaCorsi();
+        corsi.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_CorsiLabelMouseClicked
 
     /**
      * @param args the command line arguments

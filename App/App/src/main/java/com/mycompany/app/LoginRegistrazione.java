@@ -4,23 +4,30 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.*;
 
 
 public class LoginRegistrazione extends javax.swing.JFrame {
 
-    public String ruolo;
+    public static String ruolo;
+    
+    public static final String EMAIL_REGEX = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+    public static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
+
+    public static final String PASSWORD_REGEX = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    public static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
+
     
     public LoginRegistrazione() {
         initComponents();
         setIconForm();
-        alreadyRegister.setVisible(false);
-        notRegister.setVisible(false);
-        
-        notEmptyAccedi.setVisible(false);
-        notEmptyRegistrazione.setVisible(false);
-        
-        
+        setTitolare();
+        ruolo=" ";
         
     }
     
@@ -31,72 +38,129 @@ public class LoginRegistrazione extends javax.swing.JFrame {
 
     }
     
-    public void Accedi(){
+    public void Accedi() throws SQLException{
         
         DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
+        
+        String email=EmailCampoAccedi.getText();
+        String password=passwordCampoAccedi.getText();
 
         try{
             
-            
-            
-            String email=EmailCampoAccedi.getText();
-            String password=passwordCampoAccedi.getText();
+        
 
             if(email.isEmpty() || password.isEmpty()){
-                notEmptyAccedi.setVisible(true);
+                JOptionPane.showMessageDialog(LoginRegistrazione.this, "Compilare tutti i campi.");
+
             }
-            else{
             
-                if(verifyAccount(email)){
-                    
-                    Connection connection=database.getConnection();
-                    String query="SELECT nome,email,password FROM utente WHERE email = ? AND password = ?";
-                    
-                    PreparedStatement pstmt = connection.prepareStatement(query);
-        
-                    pstmt.setString(1, email);
-                    pstmt.setString(2,password);
-
-                    ResultSet rs = pstmt.executeQuery();
-                    
-                    if(rs.next()){
+            
+            else if(ruolo.equals("titolare")){
                         
-                        String nome=rs.getString("nome");
-                        String emailR=rs.getString("email");
+                        Connection connection=database.getConnection();
+                        String query="SELECT nome,email,password FROM utente WHERE email = ? AND password = ? AND ruolo = ?";
 
-                    
-                        Session session=new Session();
+                        PreparedStatement pstmt = connection.prepareStatement(query);
 
-                        session.setEmail(emailR);
-                        session.setNome(nome);
+                        pstmt.setString(1, email);
+                        pstmt.setString(2,password);
+                        pstmt.setString(3,"titolare");
 
-                        Home home=new Home();
-                        
-                        home.setVisible(true);
-                        setVisible(false);
-                        
-                        
-                    }
-                    
-                    
-                    
-                }
+                        ResultSet rs = pstmt.executeQuery();
+
+                        if(rs.next()){
+
+                            String nome=rs.getString("nome");
+                            String emailR=rs.getString("email");
+
+
+                            Session session=new Session();
+
+                            session.setEmail(emailR);
+                            session.setNome(nome);
+
+                            Home home=new Home();
+
+                            home.setVisible(true);
+                            setVisible(false);
+
+
+                        }
+                        else{
+                            
+                            JOptionPane.showMessageDialog(LoginRegistrazione.this, "Non esiste un Utente 'Master' con queste credenziali.");  
+                        }
+            }else if((!ruolo.equals("titolare"))){
+                Connection connection=database.getConnection();
+                String query="SELECT nome,email,password FROM utente WHERE email = ? AND password = ? ";
+
+                PreparedStatement pstmt = connection.prepareStatement(query);
+
+                pstmt.setString(1, email);
+                pstmt.setString(2,password);
+
+
+                ResultSet rs = pstmt.executeQuery();
+
+                if(rs.next()){
+
+                    String nome=rs.getString("nome");
+                    String emailR=rs.getString("email");
+
+
+                    Session session=new Session();
+
+                    session.setEmail(emailR);
+                    session.setNome(nome);
+
+                    HomeDipendenti home=new HomeDipendenti();
+
+                    home.setVisible(true);
+                    setVisible(false);
+                }  
                 else{
-                    
-                    notRegister.setVisible(true);
+
+                    JOptionPane.showMessageDialog(LoginRegistrazione.this, "Utente Inesistente.");
+;
                 }
             }
-            
         }catch(SQLException e){
             e.printStackTrace();
             
             
         }
-        
-          
+             
     }
     
-   
+     public void setTitolare(){
+          titolareCheckRegistrazione.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                
+                            if(titolareCheckRegistrazione.isSelected()){
+                                
+                                ruolo="titolare";
+                            }
+                            else{
+                                ruolo="dipendente";
+                            }
+                         }
+                
+        });
+          
+        titolareCheckAccedi.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                
+                            if(titolareCheckAccedi.isSelected()){
+                                
+                                ruolo="titolare";
+                            }
+                            else{
+                                ruolo="dipendente";
+                            }
+                         }
+                
+        });
+     }
     
     
    
@@ -119,18 +183,20 @@ public class LoginRegistrazione extends javax.swing.JFrame {
             if(nome.isEmpty() || cognome.isEmpty() || data_nascita.isEmpty() 
                 || telefono.isEmpty() || email.isEmpty() || password.isEmpty()){
 
-                    notEmptyRegistrazione.setVisible(true);
+                    JOptionPane.showMessageDialog(LoginRegistrazione.this, "Compilare tutti i campi.");
+
             }
             else{
             
 
                 if(verifyAccount(email)){
                     
-                    alreadyRegister.setVisible(true);
+                    JOptionPane.showMessageDialog(LoginRegistrazione.this, "Utente già registrato.");
+
                 
                 }
                 else{
-                    
+                 
                     Connection connection=database.getConnection();
 
                     String sql="INSERT INTO utente (email,password,nome,cognome,telefono,data_nascita,ruolo) VALUES (?,?,?,?,?,?,?)";
@@ -220,8 +286,6 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         ddnLabel = new javax.swing.JLabel();
         telefonoCampoRegistrazione = new javax.swing.JTextField();
         telefonoLabel = new javax.swing.JLabel();
-        alreadyRegister = new javax.swing.JLabel();
-        notEmptyRegistrazione = new javax.swing.JLabel();
         Accedi_Panel = new javax.swing.JPanel();
         AccediLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
@@ -229,9 +293,8 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         passwordLabel = new javax.swing.JLabel();
         passwordCampoAccedi = new javax.swing.JPasswordField();
         accediButton = new javax.swing.JButton();
-        notRegister = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        notEmptyAccedi = new javax.swing.JLabel();
+        titolareCheckAccedi = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Personal Forming - Accesso");
@@ -257,7 +320,7 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         NomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         NomeLabel.setText("Nome ");
 
-        RegTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        RegTitle.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
         RegTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         RegTitle.setText("REGISTRAZIONE");
         RegTitle.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -330,52 +393,34 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         telefonoLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         telefonoLabel.setText("Telefono");
 
-        alreadyRegister.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        alreadyRegister.setForeground(new java.awt.Color(255, 0, 0));
-        alreadyRegister.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        alreadyRegister.setText("Utente già registrato");
-
-        notEmptyRegistrazione.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        notEmptyRegistrazione.setForeground(new java.awt.Color(255, 0, 0));
-        notEmptyRegistrazione.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        notEmptyRegistrazione.setText("Compilare tutti i campi");
-
         javax.swing.GroupLayout Registrazion_PanelLayout = new javax.swing.GroupLayout(Registrazion_Panel);
         Registrazion_Panel.setLayout(Registrazion_PanelLayout);
         Registrazion_PanelLayout.setHorizontalGroup(
             Registrazion_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Registrazion_PanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(Registrazion_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RegTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                     .addGroup(Registrazion_PanelLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(Registrazion_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RegTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                            .addGroup(Registrazion_PanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(Registrazion_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ddnLabel)
-                                    .addGroup(Registrazion_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(titolareCheckRegistrazione)
-                                        .addComponent(NomeLabel)
-                                        .addComponent(cognomeCampoRegistrazione, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                                        .addComponent(cognomeLabel)
-                                        .addComponent(emailLabelRegistazione)
-                                        .addComponent(passwordLabelRegistazione)
-                                        .addComponent(emailCampoRegistrazione1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                                        .addComponent(passwordCampoRegistrazione, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(ddnCampoRegistrazione)
-                                        .addComponent(telefonoCampoRegistrazione)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Registrazion_PanelLayout.createSequentialGroup()
-                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(41, 41, 41))
-                                        .addComponent(NomeCampoRegistrazione))
-                                    .addComponent(telefonoLabel))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(Registrazion_PanelLayout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addGroup(Registrazion_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(notEmptyRegistrazione)
-                            .addComponent(alreadyRegister))
+                            .addComponent(ddnLabel)
+                            .addGroup(Registrazion_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(titolareCheckRegistrazione)
+                                .addComponent(NomeLabel)
+                                .addComponent(cognomeCampoRegistrazione, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                                .addComponent(cognomeLabel)
+                                .addComponent(emailLabelRegistazione)
+                                .addComponent(passwordLabelRegistazione)
+                                .addComponent(emailCampoRegistrazione1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                                .addComponent(passwordCampoRegistrazione, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ddnCampoRegistrazione)
+                                .addComponent(telefonoCampoRegistrazione)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Registrazion_PanelLayout.createSequentialGroup()
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(41, 41, 41))
+                                .addComponent(NomeCampoRegistrazione))
+                            .addComponent(telefonoLabel))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -384,15 +429,8 @@ public class LoginRegistrazione extends javax.swing.JFrame {
             .addGroup(Registrazion_PanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(RegTitle)
-                .addGroup(Registrazion_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Registrazion_PanelLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(NomeLabel))
-                    .addGroup(Registrazion_PanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(alreadyRegister)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(notEmptyRegistrazione, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(46, 46, 46)
+                .addComponent(NomeLabel)
                 .addGap(14, 14, 14)
                 .addComponent(NomeCampoRegistrazione, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
@@ -425,7 +463,7 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         Accedi_Panel.setBackground(new java.awt.Color(8, 37, 186));
         Accedi_Panel.setPreferredSize(new java.awt.Dimension(460, 348));
 
-        AccediLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        AccediLabel.setFont(new java.awt.Font("Segoe UI", 1, 26)); // NOI18N
         AccediLabel.setForeground(new java.awt.Color(255, 255, 255));
         AccediLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         AccediLabel.setText("ACCEDI");
@@ -473,37 +511,19 @@ public class LoginRegistrazione extends javax.swing.JFrame {
             }
         });
 
-        notRegister.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        notRegister.setForeground(new java.awt.Color(0, 204, 204));
-        notRegister.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        notRegister.setText("Utente non registrato");
-
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/userLogin.png"))); // NOI18N
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        notEmptyAccedi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        notEmptyAccedi.setForeground(new java.awt.Color(0, 204, 204));
-        notEmptyAccedi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        notEmptyAccedi.setText("Compilare tutti i campi");
+        titolareCheckAccedi.setBackground(new java.awt.Color(8, 37, 186));
+        titolareCheckAccedi.setForeground(new java.awt.Color(255, 255, 255));
+        titolareCheckAccedi.setText("Sei un titolare?");
+        titolareCheckAccedi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout Accedi_PanelLayout = new javax.swing.GroupLayout(Accedi_Panel);
         Accedi_Panel.setLayout(Accedi_PanelLayout);
         Accedi_PanelLayout.setHorizontalGroup(
             Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Accedi_PanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EmailCampoAccedi, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordCampoAccedi, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLabel)
-                    .addComponent(emailLabel)
-                    .addGroup(Accedi_PanelLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addGroup(Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(notEmptyAccedi)
-                            .addComponent(notRegister))))
-                .addGap(84, 84, 84))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Accedi_PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -519,17 +539,22 @@ public class LoginRegistrazione extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Accedi_PanelLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Accedi_PanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titolareCheckAccedi)
+                    .addComponent(EmailCampoAccedi, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordCampoAccedi, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordLabel)
+                    .addComponent(emailLabel))
+                .addGap(84, 84, 84))
         );
         Accedi_PanelLayout.setVerticalGroup(
             Accedi_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Accedi_PanelLayout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(AccediLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(notRegister)
-                .addGap(5, 5, 5)
-                .addComponent(notEmptyAccedi)
-                .addGap(18, 18, 18)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(emailLabel)
@@ -539,9 +564,11 @@ public class LoginRegistrazione extends javax.swing.JFrame {
                 .addComponent(passwordLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(passwordCampoAccedi, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(9, 9, 9)
+                .addComponent(titolareCheckAccedi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(accediButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -557,10 +584,7 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Accedi_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(Registrazion_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(Registrazion_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
         );
 
         pack();
@@ -569,14 +593,6 @@ public class LoginRegistrazione extends javax.swing.JFrame {
     private void NomeCampoRegistrazioneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomeCampoRegistrazioneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NomeCampoRegistrazioneActionPerformed
-
-    private void EmailCampoAccediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailCampoAccediActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmailCampoAccediActionPerformed
-
-    private void accediButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accediButtonMouseClicked
-        Accedi();
-    }//GEN-LAST:event_accediButtonMouseClicked
 
     private void cognomeCampoRegistrazioneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cognomeCampoRegistrazioneActionPerformed
         // TODO add your handling code here:
@@ -599,12 +615,28 @@ public class LoginRegistrazione extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordCampoRegistrazioneActionPerformed
 
     private void accediButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accediButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            Accedi();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginRegistrazione.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_accediButtonActionPerformed
+
+    private void accediButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accediButtonMouseClicked
+        try {
+            Accedi();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginRegistrazione.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_accediButtonMouseClicked
 
     private void passwordCampoAccediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordCampoAccediActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordCampoAccediActionPerformed
+
+    private void EmailCampoAccediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailCampoAccediActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailCampoAccediActionPerformed
 
     
     public static void main(String args[]) {
@@ -625,7 +657,6 @@ public class LoginRegistrazione extends javax.swing.JFrame {
     private javax.swing.JLabel RegTitle;
     private javax.swing.JPanel Registrazion_Panel;
     private javax.swing.JButton accediButton;
-    private javax.swing.JLabel alreadyRegister;
     private javax.swing.JTextField cognomeCampoRegistrazione;
     private javax.swing.JLabel cognomeLabel;
     private javax.swing.JTextField ddnCampoRegistrazione;
@@ -635,15 +666,13 @@ public class LoginRegistrazione extends javax.swing.JFrame {
     private javax.swing.JLabel emailLabelRegistazione;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel notEmptyAccedi;
-    private javax.swing.JLabel notEmptyRegistrazione;
-    private javax.swing.JLabel notRegister;
     private javax.swing.JPasswordField passwordCampoAccedi;
     private javax.swing.JPasswordField passwordCampoRegistrazione;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel passwordLabelRegistazione;
     private javax.swing.JTextField telefonoCampoRegistrazione;
     private javax.swing.JLabel telefonoLabel;
+    private javax.swing.JCheckBox titolareCheckAccedi;
     private javax.swing.JCheckBox titolareCheckRegistrazione;
     // End of variables declaration//GEN-END:variables
 }

@@ -51,9 +51,6 @@ public class Home extends javax.swing.JFrame {
         Aggiungi_impiegato = new javax.swing.JPanel();
         VisualizzaBTN1 = new javax.swing.JLabel();
         imgAdd = new javax.swing.JLabel();
-        Aggiungi_formazione = new javax.swing.JPanel();
-        VisualizzaBTN2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Personal Forming");
@@ -80,6 +77,11 @@ public class Home extends javax.swing.JFrame {
         CorsiLabel.setForeground(new java.awt.Color(255, 255, 255));
         CorsiLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CorsiLabel.setText("Corsi di formazione");
+        CorsiLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CorsiLabelMouseClicked(evt);
+            }
+        });
 
         CaricaLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CaricaLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -190,15 +192,15 @@ public class Home extends javax.swing.JFrame {
 
         Aggiungi_impiegato.setBackground(new java.awt.Color(255, 255, 255));
         Aggiungi_impiegato.setPreferredSize(new java.awt.Dimension(154, 136));
-        Aggiungi_impiegato.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Aggiungi_impiegatoMouseClicked(evt);
-            }
-        });
 
         VisualizzaBTN1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         VisualizzaBTN1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         VisualizzaBTN1.setText("Aggiungi Impiegato");
+        VisualizzaBTN1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VisualizzaBTN1MouseClicked(evt);
+            }
+        });
 
         imgAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         imgAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/add.png"))); // NOI18N
@@ -224,37 +226,6 @@ public class Home extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        Aggiungi_formazione.setBackground(new java.awt.Color(255, 255, 255));
-        Aggiungi_formazione.setPreferredSize(new java.awt.Dimension(154, 136));
-
-        VisualizzaBTN2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        VisualizzaBTN2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        VisualizzaBTN2.setText("Aggiungi Formazione");
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/app/img/formazione.png"))); // NOI18N
-
-        javax.swing.GroupLayout Aggiungi_formazioneLayout = new javax.swing.GroupLayout(Aggiungi_formazione);
-        Aggiungi_formazione.setLayout(Aggiungi_formazioneLayout);
-        Aggiungi_formazioneLayout.setHorizontalGroup(
-            Aggiungi_formazioneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Aggiungi_formazioneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Aggiungi_formazioneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(VisualizzaBTN2, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        Aggiungi_formazioneLayout.setVerticalGroup(
-            Aggiungi_formazioneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Aggiungi_formazioneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(VisualizzaBTN2)
-                .addGap(19, 19, 19))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,13 +235,11 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(Sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
+                        .addGap(180, 180, 180)
                         .addComponent(Visualizza_impiegati, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
+                        .addGap(150, 150, 150)
                         .addComponent(Aggiungi_impiegato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(Aggiungi_formazione, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(126, Short.MAX_VALUE))
+                        .addContainerGap(180, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(Topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -286,8 +255,7 @@ public class Home extends javax.swing.JFrame {
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Visualizza_impiegati, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Aggiungi_impiegato, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                            .addComponent(Aggiungi_formazione, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))))
+                            .addComponent(Aggiungi_impiegato, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -327,6 +295,19 @@ public class Home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CaricaLabelMouseClicked
 
+    private void CorsiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CorsiLabelMouseClicked
+        
+        VisualizzaCorsi corsi = new VisualizzaCorsi();
+        corsi.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_CorsiLabelMouseClicked
+
+    private void VisualizzaBTN1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VisualizzaBTN1MouseClicked
+        Aggiungi aggiungi=new Aggiungi();
+        aggiungi.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_VisualizzaBTN1MouseClicked
+
     private void Aggiungi_impiegatoMouseClicked(java.awt.event.MouseEvent evt){
 
         Aggiungi aggiungi=new Aggiungi();
@@ -345,7 +326,6 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AccountLabel;
-    private javax.swing.JPanel Aggiungi_formazione;
     private javax.swing.JPanel Aggiungi_impiegato;
     private javax.swing.JLabel CaricaLabel;
     private javax.swing.JLabel CorsiLabel;
@@ -354,12 +334,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel Topbar;
     private javax.swing.JLabel VisualizzaBTN;
     private javax.swing.JLabel VisualizzaBTN1;
-    private javax.swing.JLabel VisualizzaBTN2;
     private javax.swing.JPanel Visualizza_impiegati;
     private javax.swing.JLabel WelcomeLabel;
     private javax.swing.JLabel imgAdd;
     private javax.swing.JLabel imgVisualizza;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

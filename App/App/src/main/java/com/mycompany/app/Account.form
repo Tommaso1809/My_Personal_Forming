@@ -136,6 +136,9 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Corsi di formazione"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CorsiLabelMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="CaricaLabel">
           <Properties>
@@ -284,7 +287,7 @@
                       <Component id="telefonoCampo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="emailCampo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="250" max="32767" attributes="0"/>
+                  <EmptySpace pref="282" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -312,9 +315,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="nomeCampo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Tommaso"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="cognomeLabel">
           <Properties>
@@ -328,9 +328,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="cognomeCampo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Polvere"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="ddnLabel">
           <Properties>
@@ -341,9 +338,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="ddnCampo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="18-09-2005"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="telefonoLabel">
           <Properties>
@@ -354,9 +348,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="telefonoCampo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="+3945692381"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="emailLabel">
           <Properties>
@@ -367,9 +358,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="emailCampo">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="tommasopolvere18@gmail.com"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

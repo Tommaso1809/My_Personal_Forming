@@ -50,7 +50,7 @@ public class CaricaAttestati extends javax.swing.JFrame {
             DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
             Connection connection = database.getConnection();
 
-            String sql="SELECT nomeFormazione FROM formazione";
+            String sql="SELECT nome_formazione FROM corso";
             PreparedStatement stmt = connection.prepareStatement(sql);
             
             ResultSet rs = stmt.executeQuery();
@@ -58,7 +58,7 @@ public class CaricaAttestati extends javax.swing.JFrame {
       
             // Populate the JComboBox with the data from the database
             while (rs.next()) {
-                dropDownAttestati.addItem(rs.getString("nomeFormazione"));
+                dropDownAttestati.addItem(rs.getString("nome_formazione"));
             }
         
     }
@@ -190,6 +190,11 @@ public class CaricaAttestati extends javax.swing.JFrame {
         CorsiLabel.setForeground(new java.awt.Color(255, 255, 255));
         CorsiLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CorsiLabel.setText("Corsi di formazione");
+        CorsiLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CorsiLabelMouseClicked(evt);
+            }
+        });
 
         CaricaLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         CaricaLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -378,6 +383,13 @@ public class CaricaAttestati extends javax.swing.JFrame {
       
         
     }//GEN-LAST:event_dropDownAttestatiActionPerformed
+
+    private void CorsiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CorsiLabelMouseClicked
+        
+        VisualizzaCorsi corsi = new VisualizzaCorsi();
+        corsi.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_CorsiLabelMouseClicked
 
      
     /**

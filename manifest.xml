@@ -2,7 +2,7 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>C:\Users\tomma\Desktop\My_Personal_Forming\App\App.jar</jar>
+  <jar>C:\Users\tomma\Desktop\My_Personal_Forming\My_Personal_Forming.jar</jar>
   <outfile>C:\Users\tomma\Desktop\My_Personal_Forming\My Personal Forming.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
