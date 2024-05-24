@@ -45,13 +45,21 @@ public class CaricaAttestati extends javax.swing.JFrame {
     
     public void setComboBox() throws SQLException{
         
-         
+            Session sessione=new Session();
+            String email=sessione.getEmail();
           
             DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
             Connection connection = database.getConnection();
 
-            String sql="SELECT nome_formazione FROM corso";
+            String sql="SELECT nome_formazione \n" +
+                "FROM corso\n" +
+                "JOIN assegnato \n" +
+                "ON assegnato.ID=corso.ID\n" +
+                "JOIN utente\n" +
+                "ON utente.email=assegnato.utente\n" +
+                "WHERE utente.email= ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, email);
             
             ResultSet rs = stmt.executeQuery();
 
@@ -170,6 +178,7 @@ public class CaricaAttestati extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
+        setPreferredSize(new java.awt.Dimension(1044, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(1500, 200));
 
@@ -361,9 +370,23 @@ public class CaricaAttestati extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void HomeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeLabelMouseClicked
-        Home home =new Home();
-        home.setVisible(true);
-        setVisible(false);
+        
+        Session sessione=new Session();
+        String ruolo=sessione.getRuolo();
+
+        
+
+        if(ruolo.equals("titolare")){
+            Home home = new Home();
+            home.setVisible(true);
+            setVisible(false);
+        }
+        else if(!ruolo.equals("titolare")){
+
+            HomeDipendenti home=new HomeDipendenti();
+            home.setVisible(true);
+            setVisible(false);
+        }
     }//GEN-LAST:event_HomeLabelMouseClicked
 
     private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
@@ -386,9 +409,22 @@ public class CaricaAttestati extends javax.swing.JFrame {
 
     private void CorsiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CorsiLabelMouseClicked
         
-        VisualizzaCorsi corsi = new VisualizzaCorsi();
-        corsi.setVisible(true);
-        setVisible(false);
+        Session sessione=new Session();
+        String ruolo=sessione.getRuolo();
+
+        if(ruolo.equals("titolare")){
+            VisualizzaCorsi corsi = new VisualizzaCorsi();
+            corsi.setVisible(true);
+            setVisible(false);
+        }
+        else if(!ruolo.equals("titolare")){
+
+            VisualizzaCorsiPersonali corsi=new VisualizzaCorsiPersonali();
+            corsi.setVisible(true);
+            setVisible(false);
+        }
+        
+        
     }//GEN-LAST:event_CorsiLabelMouseClicked
 
      

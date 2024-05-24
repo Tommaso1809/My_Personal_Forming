@@ -69,12 +69,12 @@ public class Dipendenti extends javax.swing.JFrame {
             
     
             while (rs.next()) {
-                Object[] rowData = new Object[5];
+                Object[] rowData = new Object[4];
                 rowData[0] = rs.getString("nome");
                 rowData[1] = rs.getString("cognome");
                 rowData[2] = rs.getString("email");
                 rowData[3] = rs.getString("ruolo");
-                rowData[4] = "Scarica tutti gli attestati";
+                //rowData[4] = "Scarica tutti gli attestati";
                 DefaultTableModel model = (DefaultTableModel) Table.getModel();
                 model.addRow(rowData);
             }
@@ -84,17 +84,23 @@ public class Dipendenti extends javax.swing.JFrame {
                     if (e.getClickCount() == 2) {
                         int row = Table.rowAtPoint(e.getPoint());
                         if (row >= 0 && row < Table.getRowCount()) {
-                            Object id = Table.getValueAt(row, 0);
+                            String email  = (String) Table.getValueAt(row, 2);
                             
-                            Session sessione=new Session();
-                            sessione.setIDCorso(id);
                             
-                            VisualizzaInfo info=new VisualizzaInfo();
-                            info.setVisible(true);
-                            setVisible(false);
+                            /*Session sessione=new Session();
+                            sessione.setIDCorso(id);*/
                             
-                            /*JOptionPane.showMessageDialog(VisualizzaCorsi.this, "ID: " + id + "\nNome Formazione: " + nomeFormazione +
-                                    "\nDurata Formazione: " + durataFormazione + "\nCategoria: " + categoria + "\nStato: " + stato);*/
+                            VisualizzaCorsi corsi=new VisualizzaCorsi();
+                            try {
+                                corsi.downloadPDFFromDB(email);
+                                
+                                /*JOptionPane.showMessageDialog(VisualizzaCorsi.this, "ID: " + id + "\nNome Formazione: " + nomeFormazione +
+                                "\nDurata Formazione: " + durataFormazione + "\nCategoria: " + categoria + "\nStato: " + stato);*/
+                            } catch (SQLException ex) {
+                                Logger.getLogger(Dipendenti.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (IOException ex) {
+                                Logger.getLogger(Dipendenti.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 }
@@ -174,7 +180,6 @@ public class Dipendenti extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(1030, 537));
         setResizable(false);
         setSize(new java.awt.Dimension(1500, 200));
 
@@ -282,14 +287,14 @@ public class Dipendenti extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Cognome", "E-mail", "Ruolo", "Azione"
+                "Nome", "Cognome", "E-mail", "Ruolo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -306,7 +311,6 @@ public class Dipendenti extends javax.swing.JFrame {
             Table.getColumnModel().getColumn(1).setResizable(false);
             Table.getColumnModel().getColumn(2).setResizable(false);
             Table.getColumnModel().getColumn(3).setResizable(false);
-            Table.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout DipendentiLayout = new javax.swing.GroupLayout(Dipendenti);

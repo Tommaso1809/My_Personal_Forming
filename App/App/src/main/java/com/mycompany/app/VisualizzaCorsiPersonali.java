@@ -102,6 +102,24 @@ public class VisualizzaCorsiPersonali extends javax.swing.JFrame {
                 model.addRow(rowData);
             }
             
+            
+            Table.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2) {
+                        int row = Table.rowAtPoint(e.getPoint());
+                        if (row >= 0 && row < Table.getRowCount()) {
+                            Object id = Table.getValueAt(row, 0);
+                            
+                            
+                            
+                            
+                            /*JOptionPane.showMessageDialog(VisualizzaCorsi.this, "ID: " + id + "\nNome Formazione: " + nomeFormazione +
+                                    "\nDurata Formazione: " + durataFormazione + "\nCategoria: " + categoria + "\nStato: " + stato);*/
+                        }
+                    }
+                }
+            });
+            
         } catch (SQLException e) {
             System.out.println("Error executing SQL query");
             e.printStackTrace();
@@ -174,8 +192,9 @@ public class VisualizzaCorsiPersonali extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
+        setPreferredSize(new java.awt.Dimension(1044, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(1500, 200));
+        setSize(new java.awt.Dimension(1044, 600));
 
         Sidebar.setBackground(new java.awt.Color(8, 37, 186));
 
@@ -232,7 +251,7 @@ public class VisualizzaCorsiPersonali extends javax.swing.JFrame {
                 .addComponent(HomeLabel)
                 .addGap(50, 50, 50)
                 .addComponent(CaricaLabel)
-                .addGap(200, 200, 200))
+                .addContainerGap(482, Short.MAX_VALUE))
         );
 
         Topbar.setBackground(new java.awt.Color(255, 255, 255));
@@ -314,7 +333,7 @@ public class VisualizzaCorsiPersonali extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(289, 289, 289)
                 .addComponent(statoCampo)
-                .addGap(314, 314, 314))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -331,24 +350,35 @@ public class VisualizzaCorsiPersonali extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Topbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(Dipendenti, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 0, 0))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void HomeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeLabelMouseClicked
-        Home home =new Home();
+        Session sessione=new Session();
+       String ruolo=sessione.getRuolo();
+
+       if(ruolo.equals("titolare")){
+
+        Home home=new Home();
         home.setVisible(true);
         setVisible(false);
+       }
+       else{
+        HomeDipendenti home=new HomeDipendenti();
+        home.setVisible(true);
+        setVisible(false);
+       }
     }//GEN-LAST:event_HomeLabelMouseClicked
 
     private void CaricaLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CaricaLabelMouseClicked

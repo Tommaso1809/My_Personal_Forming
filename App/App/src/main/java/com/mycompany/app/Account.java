@@ -105,8 +105,9 @@ public class Account extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setFocusTraversalPolicyProvider(true);
         setLocationByPlatform(true);
+        setPreferredSize(new java.awt.Dimension(1044, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(1500, 200));
+        setSize(new java.awt.Dimension(1044, 960));
 
         Sidebar.setBackground(new java.awt.Color(8, 37, 186));
 
@@ -255,8 +256,8 @@ public class Account extends javax.swing.JFrame {
             DatiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DatiLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(datiAnagrafici)
-                .addGap(35, 35, 35)
+                .addComponent(datiAnagrafici, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(DatiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomeLabel)
                     .addComponent(cognomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,7 +275,7 @@ public class Account extends javax.swing.JFrame {
                 .addGroup(DatiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telefonoCampo)
                     .addComponent(emailCampo))
-                .addContainerGap(282, Short.MAX_VALUE))
+                .addContainerGap(681, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -306,15 +307,38 @@ public class Account extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void HomeLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeLabelMouseClicked
-        Home home =new Home();
+       Session sessione=new Session();
+       String ruolo=sessione.getRuolo();
+
+       if(ruolo.equals("titolare")){
+
+        Home home=new Home();
         home.setVisible(true);
         setVisible(false);
+       }
+       else{
+        HomeDipendenti home=new HomeDipendenti();
+        home.setVisible(true);
+        setVisible(false);
+       }
+       
     }//GEN-LAST:event_HomeLabelMouseClicked
 
     private void CorsiLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CorsiLabelMouseClicked
-        VisualizzaCorsi corsi = new VisualizzaCorsi();
-        corsi.setVisible(true);
-        setVisible(false);
+        
+        Session sessione=new Session();
+        String ruolo=sessione.getRuolo();
+
+        if(ruolo.equals("titolare")){
+            VisualizzaCorsi corsi = new VisualizzaCorsi();
+            corsi.setVisible(true);
+            setVisible(false);
+        } 
+        else{
+            VisualizzaCorsiPersonali corsi = new VisualizzaCorsiPersonali();
+            corsi.setVisible(true);
+            setVisible(false);
+        }    
     }//GEN-LAST:event_CorsiLabelMouseClicked
 
     

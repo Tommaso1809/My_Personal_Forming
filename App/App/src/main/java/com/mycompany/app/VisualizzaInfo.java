@@ -2,6 +2,8 @@
 package com.mycompany.app;
 
 import java.awt.Desktop;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,30 +23,37 @@ public class VisualizzaInfo extends javax.swing.JFrame {
 
     public static  String nome_utente;
 
-    public VisualizzaInfo() {
+    public static String persona;
+
+    public VisualizzaInfo() throws SQLException {
         initComponents();
         setIconForm();
         setWelcome();
         showInfo();
         setNomeCorso();
+        setComboBox();
     }
 
     public void setComboBox() throws SQLException{
         
-         
+           
+            Session sessione=new Session();
+            String email=sessione.getEmail();
           
             DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
             Connection connection = database.getConnection();
 
-            String sql="SELECT cognome FROM utente";
+            String sql="SELECT email FROM utente WHERE NOT ruolo = ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
-            
+
+            stmt.setString(1,"titolare");
+
             ResultSet rs = stmt.executeQuery();
 
       
             // Populate the JComboBox with the data from the database
             while (rs.next()) {
-                
+                JBox.addItem(rs.getString("email"));
             }
         
     }
@@ -138,10 +147,7 @@ public class VisualizzaInfo extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel) Table.getModel();
                 model.addRow(rowData);
             }
-            
-
-
-            
+        
             
             //String sql="SELECT cognome FROM utente"
         } catch (SQLException e) {
@@ -151,7 +157,7 @@ public class VisualizzaInfo extends javax.swing.JFrame {
     }
         
     
-   /* public void downloadPDFFromDB() throws SQLException, FileNotFoundException, IOException{
+    /*public void downloadPDFFromDB() throws SQLException, FileNotFoundException, IOException{
         DBHanderl database = new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
         Connection connection = database.getConnection();
         String sql = "SELECT filename FROM attestato JOIN possiede ON possiede.ID=attestato.ID JOIN utente ON  utente.email=possiede.utente WHERE utente.email= ?";
@@ -177,17 +183,17 @@ public class VisualizzaInfo extends javax.swing.JFrame {
                 fos.write(fileData);
                 fos.flush();
                 fos.close();
-                 JOptionPane.showMessageDialog(VisualizzaCorsi.this, "File Scaricato nella Cartella Download.");
+                 JOptionPane.showMessageDialog(VisualizzaInfo.this, "File Scaricato nella Cartella Download.");
                 try (FileInputStream fis = new FileInputStream(file)) {
                     Desktop.getDesktop().open(file);
                 } catch (IOException ex) {
-                     JOptionPane.showMessageDialog(VisualizzaCorsi.this, "Errore di Sistema.");
+                     JOptionPane.showMessageDialog(VisualizzaInfo.this, "Errore di Sistema.");
                 }
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(VisualizzaCorsi.this, "Errore di Sistema.");
+                JOptionPane.showMessageDialog(VisualizzaInfo.this, "Errore di Sistema.");
             }
         } else {
-             JOptionPane.showMessageDialog(VisualizzaCorsi.this, "Nessun File Trovato.");
+             JOptionPane.showMessageDialog(VisualizzaInfo.this, "Nessun File Trovato.");
         }
 
         pstmt.close();
@@ -210,15 +216,17 @@ public class VisualizzaInfo extends javax.swing.JFrame {
         nomeCorsoLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        JBox = new javax.swing.JComboBox<>();
+        ButtonAssegna = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Personal Forming - Info Corso");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(1030, 521));
         setResizable(false);
-        setSize(new java.awt.Dimension(1500, 200));
+        setSize(new java.awt.Dimension(1044, 600));
 
         Sidebar.setBackground(new java.awt.Color(8, 37, 186));
 
@@ -322,9 +330,16 @@ public class VisualizzaInfo extends javax.swing.JFrame {
                 "Nome", "Cognome", "Email", "Ruolo", "Stato"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -342,6 +357,25 @@ public class VisualizzaInfo extends javax.swing.JFrame {
             Table.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("ASSEGNA A");
+
+        JBox.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        JBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBoxActionPerformed(evt);
+            }
+        });
+
+        ButtonAssegna.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        ButtonAssegna.setText("Assegna");
+        ButtonAssegna.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ButtonAssegna.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonAssegnaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout DipendentiLayout = new javax.swing.GroupLayout(Dipendenti);
         Dipendenti.setLayout(DipendentiLayout);
         DipendentiLayout.setHorizontalGroup(
@@ -349,9 +383,14 @@ public class VisualizzaInfo extends javax.swing.JFrame {
             .addGroup(DipendentiLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addComponent(nomeCorsoLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(85, Short.MAX_VALUE))
+                    .addGroup(DipendentiLayout.createSequentialGroup()
+                        .addComponent(JBox, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(ButtonAssegna, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DipendentiLayout.setVerticalGroup(
             DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +399,13 @@ public class VisualizzaInfo extends javax.swing.JFrame {
                 .addComponent(nomeCorsoLabel)
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(623, 623, 623))
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonAssegna, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(106, 106, 106))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -410,6 +455,43 @@ public class VisualizzaInfo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_CaricaLabelMouseClicked
 
+    private void JBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBoxActionPerformed
+        
+        VisualizzaInfo.persona = (String) JBox.getSelectedItem();
+        
+        
+    }//GEN-LAST:event_JBoxActionPerformed
+
+    private void ButtonAssegnaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAssegnaMouseClicked
+       
+        DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
+
+        try{
+            Connection connection=database.getConnection();
+            
+            String query="INSERT INTO assegnato (ID,utente) VALUES(?,?)";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            
+            Session sessione =new Session();
+            Object id=sessione.getIDCorso();
+            
+            
+            int id_corso=Integer.parseInt(id.toString());
+            
+            stmt.setInt(1,id_corso);
+            stmt.setString(2,persona);
+            
+            stmt.executeUpdate();
+            
+            
+            JOptionPane.showMessageDialog(VisualizzaInfo.this, "Assegnamento Completato.");
+
+            
+        }catch(SQLException e){
+            
+        }
+    }//GEN-LAST:event_ButtonAssegnaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -455,21 +537,28 @@ public class VisualizzaInfo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VisualizzaInfo().setVisible(true);
+                try {
+                    new VisualizzaInfo().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VisualizzaInfo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonAssegna;
     private javax.swing.JLabel CaricaLabel;
     private javax.swing.JLabel CorsiLabel;
     private javax.swing.JPanel Dipendenti;
     private javax.swing.JLabel HomeLabel;
+    private javax.swing.JComboBox<String> JBox;
     private javax.swing.JLabel PicturUser;
     private javax.swing.JPanel Sidebar;
     private javax.swing.JTable Table;
     private javax.swing.JPanel Topbar;
     private javax.swing.JLabel WelcomeLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nomeCorsoLabel;
     private javax.swing.JLabel titleBar;

@@ -53,9 +53,9 @@ public class HomeDipendenti extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(1032, 537));
+        setPreferredSize(new java.awt.Dimension(1044, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(1500, 200));
+        setSize(new java.awt.Dimension(1044, 600));
 
         Sidebar.setBackground(new java.awt.Color(8, 37, 186));
 
@@ -86,7 +86,6 @@ public class HomeDipendenti extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        WelcomeLabel.setText("Benvenuto Tommaso");
 
         javax.swing.GroupLayout SidebarLayout = new javax.swing.GroupLayout(Sidebar);
         Sidebar.setLayout(SidebarLayout);
@@ -189,9 +188,9 @@ public class HomeDipendenti extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(Sidebar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Topbar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -205,11 +204,8 @@ public class HomeDipendenti extends javax.swing.JFrame {
                 .addComponent(Topbar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addComponent(formazione, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 233, Short.MAX_VALUE))
+            .addComponent(Sidebar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -231,8 +227,8 @@ public class HomeDipendenti extends javax.swing.JFrame {
 
     private void formazioneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formazioneMouseClicked
        
-        Dipendenti dipendenti=new Dipendenti();
-        dipendenti.setVisible(true);
+        VisualizzaCorsiPersonali corsiPersonali=new VisualizzaCorsiPersonali();
+        corsiPersonali.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_formazioneMouseClicked
 

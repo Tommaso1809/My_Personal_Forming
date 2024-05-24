@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Aggiungi extends javax.swing.JFrame {
 
@@ -16,7 +17,7 @@ public class Aggiungi extends javax.swing.JFrame {
         setIconForm();
         setWelcome();
 
-        statusAdd.setVisible(false);
+       
     }
 
     public void setIconForm(){
@@ -49,7 +50,7 @@ public class Aggiungi extends javax.swing.JFrame {
         if(nome.isEmpty() || cognome.isEmpty() || data_nascita.isEmpty() 
         || telefono.isEmpty() || email.isEmpty() || ruolo.isEmpty()){
 
-            statusAdd.setVisible(true);
+             JOptionPane.showMessageDialog(Aggiungi.this, "Compilare tutti i campi.");
 
            
         }
@@ -75,8 +76,8 @@ public class Aggiungi extends javax.swing.JFrame {
                 
                 pstmt.executeUpdate();
                 
-                statusAdd.setForeground(new java.awt.Color(0,153,51));
-                statusAdd.setText("Dipendente Aggiunto ");
+                JOptionPane.showMessageDialog(Aggiungi.this, "Dipendente Aggiunto.");
+
 
 
                 
@@ -113,13 +114,13 @@ public class Aggiungi extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         telefonoField = new java.awt.TextField();
         emailField = new java.awt.TextField();
-        statusAdd = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("My Personal Forming - Dipendenti");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
+        setPreferredSize(new java.awt.Dimension(1044, 600));
         setResizable(false);
         setSize(new java.awt.Dimension(1500, 200));
 
@@ -171,13 +172,11 @@ public class Aggiungi extends javax.swing.JFrame {
             .addGroup(SidebarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SidebarLayout.createSequentialGroup()
-                        .addComponent(WelcomeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addComponent(HomeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(CorsiLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                     .addComponent(CaricaLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PicturUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(PicturUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(WelcomeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         SidebarLayout.setVerticalGroup(
             SidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,10 +278,6 @@ public class Aggiungi extends javax.swing.JFrame {
             }
         });
 
-        statusAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        statusAdd.setForeground(new java.awt.Color(255, 0, 0));
-        statusAdd.setText("Compilare tutti i campi");
-
         javax.swing.GroupLayout DipendentiLayout = new javax.swing.GroupLayout(Dipendenti);
         Dipendenti.setLayout(DipendentiLayout);
         DipendentiLayout.setHorizontalGroup(
@@ -302,7 +297,6 @@ public class Aggiungi extends javax.swing.JFrame {
                             .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cognomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(statusAdd)
                             .addComponent(cognomeLabel))
                         .addGap(90, 90, 90)
                         .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,26 +312,19 @@ public class Aggiungi extends javax.swing.JFrame {
             .addGroup(DipendentiLayout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cognomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ddnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(DipendentiLayout.createSequentialGroup()
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ddnLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(DipendentiLayout.createSequentialGroup()
-                                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(dipendentiLabel)
-                                    .addComponent(statusAdd))
-                                .addGap(30, 30, 30)
-                                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(nomeLabel)
-                                    .addComponent(cognomeLabel))))
-                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DipendentiLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(ddnField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DipendentiLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(40, 40, 40)
+                        .addComponent(dipendentiLabel)
+                        .addGap(30, 30, 30)
+                        .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nomeLabel)
+                            .addComponent(cognomeLabel))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cognomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ddnField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
                 .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(DipendentiLayout.createSequentialGroup()
                         .addGroup(DipendentiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,7 +507,6 @@ public class Aggiungi extends javax.swing.JFrame {
     private javax.swing.JLabel nomeLabel;
     private java.awt.TextField ruoloField;
     private java.awt.Label ruoloLabel;
-    private javax.swing.JLabel statusAdd;
     private java.awt.TextField telefonoField;
     private javax.swing.JLabel telefonoLabel;
     private javax.swing.JLabel titleBar;

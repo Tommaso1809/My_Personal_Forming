@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.*;
+import com.mycompany.app.HomeDipendenti;
 
 
 public class LoginRegistrazione extends javax.swing.JFrame {
@@ -78,6 +79,8 @@ public class LoginRegistrazione extends javax.swing.JFrame {
 
                             session.setEmail(emailR);
                             session.setNome(nome);
+                            session.setRuolo(ruolo);
+
 
                             Home home=new Home();
 
@@ -112,10 +115,12 @@ public class LoginRegistrazione extends javax.swing.JFrame {
 
                     session.setEmail(emailR);
                     session.setNome(nome);
+                    session.setRuolo(ruolo);
 
-                    HomeDipendenti home=new HomeDipendenti();
 
-                    home.setVisible(true);
+                    HomeDipendenti homeDipendenti=new HomeDipendenti();
+
+                    homeDipendenti.setVisible(true);
                     setVisible(false);
                 }  
                 else{
@@ -166,71 +171,85 @@ public class LoginRegistrazione extends javax.swing.JFrame {
    
     public void insertRegistrazione(){
 
-        DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
-
-        
-        
         try{
+            DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
 
-            String nome=NomeCampoRegistrazione.getText();
-            String cognome=cognomeCampoRegistrazione.getText();
-            String data_nascita=ddnCampoRegistrazione.getText();
-            String telefono=telefonoCampoRegistrazione.getText();
-            String email=emailCampoRegistrazione1.getText();
-            String password=passwordCampoRegistrazione.getText();
-            
+                String nome=NomeCampoRegistrazione.getText();
+                String cognome=cognomeCampoRegistrazione.getText();
+                String data_nascita=ddnCampoRegistrazione.getText();
+                String telefono=telefonoCampoRegistrazione.getText();
+                String email=emailCampoRegistrazione1.getText();
+                String password=passwordCampoRegistrazione.getText();
+                
 
-            if(nome.isEmpty() || cognome.isEmpty() || data_nascita.isEmpty() 
-                || telefono.isEmpty() || email.isEmpty() || password.isEmpty()){
+                if(nome.isEmpty() || cognome.isEmpty() || data_nascita.isEmpty() 
+                    || telefono.isEmpty() || email.isEmpty() || password.isEmpty()){
 
-                    JOptionPane.showMessageDialog(LoginRegistrazione.this, "Compilare tutti i campi.");
+                        JOptionPane.showMessageDialog(LoginRegistrazione.this, "Compilare tutti i campi.");
+
+                }
+                else if(ruolo.equals("titolare")){
+
+                        Connection connection=database.getConnection();
+                        String query="INSERT INTO utente (email,password,nome,cognome,telefono,data_nascita,ruolo) VALUES (?,?,?,?,?,?,?)";
+                        PreparedStatement pstmt=connection.prepareStatement(query);
+                        
+                        pstmt.setString(1, email);
+                        pstmt.setString(2, password);
+                        pstmt.setString(3, nome);
+                        pstmt.setString(4, cognome);
+                        pstmt.setString(5,telefono);
+                        pstmt.setString(6,data_nascita);
+                        pstmt.setString(7, ruolo);
+
+                        pstmt.executeUpdate();
+
+                    
+                        Session sessione=new Session();
+                        sessione.setEmail(email);
+                        sessione.setNome(nome);
+                        sessione.setRuolo(ruolo);
+
+                        Home home=new Home();
+                        home.setVisible(true);
+                        setVisible(false);
+                        
+                       
+                }
+                else if(!ruolo.equals("titolare")){
+
+                        Connection connection=database.getConnection();
+                        String query="INSERT INTO utente (email,password,nome,cognome,telefono,data_nascita,ruolo) VALUES (?,?,?,?,?,?,?)";
+                        PreparedStatement pstmt=connection.prepareStatement(query);
+                        
+                        pstmt.setString(1, email);
+                        pstmt.setString(2, password);
+                        pstmt.setString(3, nome);
+                        pstmt.setString(4, cognome);
+                        pstmt.setString(5,telefono);
+                        pstmt.setString(6,data_nascita);
+                        pstmt.setString(7, ruolo);
+
+                        pstmt.executeUpdate();
+
+                        
+                        Session sessione=new Session();
+                        sessione.setEmail(email);
+                        sessione.setNome(nome);
+                        sessione.setRuolo(ruolo);
+
+
+                        HomeDipendenti home=new HomeDipendenti();
+                        home.setVisible(true);
+                        setVisible(false);
+                        }
+                        
+                
+
+            }catch(SQLException e){
+                JOptionPane.showMessageDialog(LoginRegistrazione.this, "Si è verificato un errore.");
 
             }
-            else{
-            
-
-                if(verifyAccount(email)){
-                    
-                    JOptionPane.showMessageDialog(LoginRegistrazione.this, "Utente già registrato.");
-
-                
-                }
-                else{
-                 
-                    Connection connection=database.getConnection();
-
-                    String sql="INSERT INTO utente (email,password,nome,cognome,telefono,data_nascita,ruolo) VALUES (?,?,?,?,?,?,?)";
-                    PreparedStatement pstmt=connection.prepareStatement(sql);
-                    
-                    pstmt.setString(1, email);
-                    pstmt.setString(2, password);
-                    pstmt.setString(3, nome);
-                    pstmt.setString(4, cognome);
-                    pstmt.setString(5,telefono);
-                    pstmt.setString(6,data_nascita);
-                    pstmt.setString(7, ruolo);
-                    
-                    
-                    pstmt.executeUpdate();
-                    
-                    Session sessione=new Session();
-                    sessione.setNome(nome);
-                    sessione.setEmail(email);
-                    
-                    Home home=new Home();
-                    home.setVisible(true);
-                    setVisible(false);
-                    
-                    
-                }
-           
-            }  
-
-
-        }catch(SQLException e){
-            e.printStackTrace();
-
-        }
     }
 
     public Boolean verifyAccount(String email) {
@@ -304,7 +323,7 @@ public class LoginRegistrazione extends javax.swing.JFrame {
         setLocation(new java.awt.Point(100, 100));
         setLocationByPlatform(true);
         setResizable(false);
-        setSize(new java.awt.Dimension(1500, 200));
+        setSize(new java.awt.Dimension(1044, 600));
 
         Registrazion_Panel.setBackground(new java.awt.Color(255, 255, 255));
         Registrazion_Panel.setPreferredSize(new java.awt.Dimension(460, 549));
@@ -615,11 +634,7 @@ public class LoginRegistrazione extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordCampoRegistrazioneActionPerformed
 
     private void accediButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accediButtonActionPerformed
-        try {
-            Accedi();
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginRegistrazione.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_accediButtonActionPerformed
 
     private void accediButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_accediButtonMouseClicked

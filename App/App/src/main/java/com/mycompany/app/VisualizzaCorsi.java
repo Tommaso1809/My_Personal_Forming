@@ -31,26 +31,7 @@ public class VisualizzaCorsi extends javax.swing.JFrame {
    
     }
 
-    public void setComboBox() throws SQLException{
-        
-         
-          
-            DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
-            Connection connection = database.getConnection();
-
-            String sql="SELECT cognome FROM utente";
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            
-            ResultSet rs = stmt.executeQuery();
-
-      
-            // Populate the JComboBox with the data from the database
-            while (rs.next()) {
-                
-            }
-        
-    }
-    
+   
     public void setWelcome(){
 
         Session session=new Session();
@@ -67,7 +48,7 @@ public class VisualizzaCorsi extends javax.swing.JFrame {
 
     }
    
-    public void showCorsi(){
+    public void showCorsi() {
          DBHanderl database=new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
 
     
@@ -76,8 +57,6 @@ public class VisualizzaCorsi extends javax.swing.JFrame {
             Connection connection=database.getConnection();
 
             Session session=new Session();
-
-            
 
             String query = "SELECT * FROM corso";
             PreparedStatement pstmt = connection.prepareStatement(query);
@@ -106,23 +85,23 @@ public class VisualizzaCorsi extends javax.swing.JFrame {
                             
                             Session sessione=new Session();
                             sessione.setIDCorso(id);
-                            
-                            VisualizzaInfo info=new VisualizzaInfo();
-                            info.setVisible(true);
-                            setVisible(false);
-                            
-                            /*JOptionPane.showMessageDialog(VisualizzaCorsi.this, "ID: " + id + "\nNome Formazione: " + nomeFormazione +
-                                    "\nDurata Formazione: " + durataFormazione + "\nCategoria: " + categoria + "\nStato: " + stato);*/
+
+                            VisualizzaInfo info;
+                            try {
+                                info = new VisualizzaInfo();
+                                info.setVisible(true);
+                                setVisible(false);
+                            } catch (SQLException e1) {
+                                // TODO Auto-generated catch block
+                                e1.printStackTrace();
+                            }
+    
                         }
                     }
                 }
             });
 
 
-
-            
-            
-            //String sql="SELECT cognome FROM utente"
         } catch (SQLException e) {
             System.out.println("Error executing SQL query");
             e.printStackTrace();
@@ -130,15 +109,12 @@ public class VisualizzaCorsi extends javax.swing.JFrame {
     }
         
     
-   /* public void downloadPDFFromDB() throws SQLException, FileNotFoundException, IOException{
+    public void downloadPDFFromDB(String email) throws SQLException, FileNotFoundException, IOException{
         DBHanderl database = new DBHanderl("jdbc:mysql://sql7.freesqldatabase.com:3306/sql7708180","sql7708180","JM9YdWtS9J");
         Connection connection = database.getConnection();
         String sql = "SELECT filename FROM attestato JOIN possiede ON possiede.ID=attestato.ID JOIN utente ON  utente.email=possiede.utente WHERE utente.email= ?";
         PreparedStatement pstmt = connection.prepareStatement(sql);
-        
-        Session sessione=new Session();
-        String email=sessione.getEmail();
-        
+              
         pstmt.setString(1, email);
         ResultSet rs = pstmt.executeQuery();
         
@@ -172,7 +148,7 @@ public class VisualizzaCorsi extends javax.swing.JFrame {
         pstmt.close();
         connection.close();
     }
-    */
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -196,9 +172,9 @@ public class VisualizzaCorsi extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(1030, 521));
+        setPreferredSize(new java.awt.Dimension(1044, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(1500, 200));
+        setSize(new java.awt.Dimension(1044, 600));
 
         Sidebar.setBackground(new java.awt.Color(8, 37, 186));
 
@@ -351,7 +327,7 @@ public class VisualizzaCorsi extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(289, 289, 289)
                 .addComponent(statoCampo)
-                .addGap(314, 314, 314))
+                .addGap(300, 300, 300))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

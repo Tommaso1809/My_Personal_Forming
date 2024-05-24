@@ -9,6 +9,9 @@
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
     <Property name="locationByPlatform" type="boolean" value="true"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1044, 600]"/>
+    </Property>
     <Property name="resizable" type="boolean" value="false"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[1500, 200]"/>
@@ -75,14 +78,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="WelcomeLabel" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
                       <Component id="HomeLabel" max="32767" attributes="0"/>
                       <Component id="CorsiLabel" pref="208" max="32767" attributes="0"/>
                       <Component id="CaricaLabel" alignment="0" max="32767" attributes="0"/>
                       <Component id="PicturUser" alignment="1" max="32767" attributes="0"/>
+                      <Component id="WelcomeLabel" alignment="1" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -243,7 +243,6 @@
                               <Component id="emailField" min="-2" pref="130" max="-2" attributes="0"/>
                               <Component id="cognomeField" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                               <Component id="emailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="statusAdd" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="cognomeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
@@ -265,35 +264,23 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="cognomeField" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="ddnLabel" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="ddnLabel" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="dipendentiLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="statusAdd" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="nomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cognomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="ddnField" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="nomeField" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
+                          <Component id="dipendentiLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="nomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cognomeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="cognomeField" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="nomeField" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="ddnField" min="-2" pref="20" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -443,17 +430,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailFieldActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="statusAdd">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="12" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="ff" type="rgb"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Compilare tutti i campi"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
